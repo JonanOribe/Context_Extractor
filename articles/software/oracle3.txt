@@ -1,0 +1,244 @@
+﻿InicioIr al contenidoIr a la búsqueda
+Menú
+Búsqueda
+Type 2 or more characters for results.
+Inicie sesión
+
+
+País/Región
+Contacto
+Oracle Autonomous Database
+
+
+
+PreviousNext
+1
+2
+3
+Oracle España
+Base de datos
+Oracle Autonomous Database
+Pásese a la autonomía Vea el webcast
+Descripción general
+Autonomous
+Cloud Services
+Products A–Z
+Technical Details
+Prueba gratuita en la nube
+Autonomous Database: Siéntese, relájese y deje que Oracle se ocupe de todo.
+Autonomous Database: Siéntese, relájese y deje que Oracle se ocupe de todo.
+Más información  Descubra la historia
+¿Qué es Autonomous Database?
+
+Oracle redefine la gestión de datos con la primera base de datos autónoma del mundo. Oracle Autonomous Database elimina la complejidad, el error humano y la gestión manual, y así contribuye a garantizar una mayor fiabilidad, seguridad y eficiencia al menor coste posible.
+
+Vea los momentos destacados del vídeo (3:40) ¿Qué es Autonomous Database?
+Funcionamiento
+Autogestión
+Autoprotección
+Autorreparación
+AUTOGESTIÓN
+Acabe con la gestión manual de bases de datos
+Oracle Autonomous Database es la primera solución autónoma de gestión de datos en la nube del mundo que ofrece capacidades automatizadas de aplicación de parches, actualizaciones y ajustes, incluidas todas las tareas rutinarias de mantenimiento de bases de datos mientras el sistema está en ejecución, sin intervención humana. Esta nueva base de datos autónoma ofrece funciones de autogestión, autoprotección y autorreparación que contribuyen a eliminar las tareas manuales de gestión de bases de datos y los errores humanos.
+
+Informe: Autonomous Database: La primera base de datos de autogestión de la industria (PDF)
+Informe: Estrategia de base de datos autónoma (PDF)
+Estudio de IDC: Oracle Autonomous Database: Automatización basada en la IA para la gestión de bases de datos y las operaciones (PDF)
+Autogestión
+¿Desea obtener más información de los expertos?
+Autonomous Database: opiniones clave de los ejecutivos de Oracle
+
+
+Vídeo: Las ventajas de Oracle Autonomous Database (7:29)
+
+Vídeo: Autonomous Data Warehouse: Funcionamiento bajo el capó (16:37)
+
+Vídeo: Autonomous Database: Seguridad por defecto (2:26)
+Ventajas de la base de datos autónoma
+Las nubes de base de datos convencionales se gestionan y configuran de forma manual, son susceptibles de sufrir errores humanos y pueden quedar fácilmente expuestas a costosas vulnerabilidades de seguridad, haciendo que la promesa de ahorro y rentabilidad de la nube resulte imposible de cumplir. Oracle recurre al machine learning para revolucionar la gestión de datos con la introducción de la primera base de datos autónoma del mundo, que ofrece un mayor grado de automatización para incrementar el ahorro.
+
+ 
+Alta disponibilidad
+Recuperación automática de cualquier fallo
+Tiempo de actividad del 99,995 por ciento (incluido mantenimiento) garantizado
+Escala de manera flexible la capacidad de computación o de almacenamiento sin tiempo de inactividad
+Informe: Estrategia de base de datos autónoma (PDF)
+Vídeo: Autonomous Database: Funcionamiento (11:00)
+ 
+Rendimiento líder en la industria
+Los algoritmos de machine learning integrados permiten un almacenamiento automático en caché, indexación adaptativa, compresión avanzada y carga de datos optimizada en la nube para ofrecer un rendimiento incomparable.
+El ajuste adaptativo y automático del rendimiento ofrece capacidades analíticas más rápidas.
+Accenture: visión tecnológica para Oracle (PDF)
+Nota de investigación de Wintercorp: Autonomous Data Warehouse: la base de datos de autogestión de Oracle (PDF)
+ 
+Protección
+Administra la seguridad de forma automática y realiza sus propias actualizaciones y aplicaciones de parches sin tiempo de inactividad.
+Todos los datos quedan automáticamente protegidos con un potente cifrado activado de manera predeterminada.
+El acceso está supervisado y controlado, lo que ofrece protección frente a ataques externos y accesos internos no autorizados.
+Informe de KuppingerCole: Evaluación de seguridad de Oracle Database (PDF)
+Vídeo: Autonomous Database: Seguridad por defecto (2:26)
+ 
+Menor coste
+Amplíe/disminuya la capacidad de computación y de almacenamiento de manera independiente y sin tiempo de inactividad costoso.
+Evite pagar de más por configuraciones fijas que solo utilice parcialmente.
+Realice la transición a Oracle Cloud y reduzca a la mitad su factura de Amazon: garantizado.
+Artículo: Está gastando demasiado en Amazon AWS
+Calculadora de ATP: Procesamiento autónomo de transacciones
+Productos Autonomous Database
+Los productos de base de datos autónoma están disponibles en exclusiva a través de Oracle y se ofrecen en dos versiones optimizadas para satisfacer las necesidades específicas de procesamiento de transacciones online y almacenamiento de datos. Ambos utilizan machine learning y automatización para eliminar la complejidad, los errores humanos y la manipulación manual, por lo que garantizan una mayor fiabilidad, seguridad y eficiencia operativa. El servicio de procesamiento de transacciones autónomo permite un desarrollo y despliegue de aplicaciones mucho más sencillo para ofrecer capacidades de analítica en tiempo real, personalización y detección de fraudes. Autonomous Data Warehouse ofrece fiabilidad y rendimiento sin precedentes, así como una gestión de datos altamente flexible que hace posible el despliegue de almacenes de datos en cuestión de segundos.
+
+“Oracle Autonomous Data Warehouse Cloud permitirá a Hertz reducir costes y reinvertir el ahorro en mejorar nuestro servicio al cliente y en recompensar a nuestros clientes”, afirmó Benjamin Arnulf, director de Analítica y BI de Hertz
+
+Autonomous Data Warehouse Autonomous Online Transaction Processing
+Captura de pantalla de la página de Oracle Autonomous
+Información destacada
+Recursos de base de datos autónoma
+Ipaper
+Ipaper
+Procesamiento de transacciones de base de datos autónoma: Acelere la innovación con la última base de datos de autogestión de Oracle (PDF)
+Calculadora
+Calculadora de TCO
+Ahorre con Oracle Autonomous Transaction Processing. Calcule el coste total de propiedad y obtenga su informe personalizado.
+Ebook
+Ebook
+Los nuevos horizontes de la automatización: Descubra cómo la IA y el machine learning hacen posible una nueva era de eficiencia. (PDF)
+Demostración
+Demostración
+Acceda fácilmente a sus datos y a información analítica para beneficiar a su empresa hoy mismo. (3:44)
+Descubra más recursos de Oracle Database
+Casos de clientes
+Éxitos de los clientes de bases de datos
+Logotipo de DX
+Advanced Analytics en Autonomous Data Warehouse Cloud
+ 
+Advanced Analytics en Autonomous Data Warehouse Cloud
+Jerry Gearding, director de Tecnología de DX Marketing, habla de ejecutar la analítica avanzada en Autonomous Data Warehouse Cloud.
+
+Véalo ahora (0:46)
+Logotipo de Drop Tank
+Drop Tank impulsa el crecimiento con Oracle Autonomous Cloud
+ 
+Drop Tank impulsa el crecimiento con Oracle Autonomous Cloud
+Drop Tank innova en los programas de fidelidad de las gasolineras proporcionando información detallada mediante Oracle Autonomous Data Warehouse Cloud. Drop Tank ahora puede escalar automáticamente su capacidad para atender a sus millones de socios de su programa de fidelidad y, así, crecer más rápidamente.
+
+Véalo ahora (1:31)
+Logotipo de Data Intensity
+Data Intensity innova con Oracle Autonomous Cloud
+ 
+Data Intensity innova con Oracle Autonomous Cloud
+Data Intensity ahora puede concentrarse al 100% en los datos, con un tiempo de provisión 10 veces más rápido y un rendimiento de 3 a 4 veces mayor respecto de otros equipos innovadores on-premise, gracias a Oracle Autonomous Data Warehouse Cloud y Autonomous Analytics Cloud.
+
+Véalo ahora (1:41)
+Hertz acelera sus proyectos de TI con Oracle Autonomous Data Warehouse
+Hertz Corporation acelera sus proyectos de TI para ofrecer un mejor servicio al cliente al reducir el tiempo de configuración de la base de datos de semanas a minutos gracias a Oracle Autonomous Data Warehouse.
+
+Véalo ahora (1:44)
+Autonomous Data Warehouse Cloud: Analítica a la velocidad del pensamiento
+Nouras Haddad, director de Tecnología del proveedor de analítica Looker, habla de cómo Autonomous Data Warehouse Cloud proporciona capacidades analíticas escalables a la velocidad del pensamiento.
+
+Véalo ahora (0:51)
+Hemos descubierto que Oracle Autonomous Data Warehouse Cloud resulta muy fácil de usar y facilita en gran medida la carga de datos, y el rendimiento obtenido ha sido increíble.
+Miles Oustad, director del equipo de Integración de datos, estado de Minnesota
+Sencillez, rapidez y flexibilidad con Autonomous Data Warehouse Cloud
+Miles Oustad, arquitecto empresarial del estado de Minnesota, comparte su experiencia de facilidad de uso, rendimiento en las consultas y escalabilidad flexible en Autonomous Data Warehouse Cloud.
+
+Véalo ahora (0:52)
+Las tecnologías de bases de datos autónomas no solo permitirán reducir los costes operativos, sino que también nos permitirán profundizar más para ofrecer información más precisa y, en última instancia, impulsar el éxito de nuestros clientes.
+Al Cordoba, director de operaciones de Qualex
+QLX mejora la experiencia de fan con Autonomous Data Warehouse
+Combinada con la analítica de ML, Autonomous Data Warehouse permite a QLX Consulting ofrecer mejores experiencias a sus aficionados deportivos.
+
+Véalo ahora (1:56)
+Analítica en Oracle Autonomous Data Warehouse Cloud
+El experto en analítica Tim Vlamis habla de cómo Oracle Autonomous Data Warehouse abrirá nuevas oportunidades para que las organizaciones pongan datos en la nube y los utilicen rápidamente.
+
+Véalo ahora (0:59)
+Cuando se trata con vidas humanas, el tiempo lo es todo. La posibilidad de que Oracle Autonomous Data Warehouse Cloud se ajuste y administre automáticamente sin tiempo de inactividad se traduce en tiempos de respuesta más cortos y decisiones más rápidas; algo crucial para nosotros y para nuestros clientes.
+Michael Morales, consejero delegado de QMP Health
+Ofrecer un mejor servicio al cliente con Autonomous Data Warehouse Cloud
+Michael Morales, consejero delegado de QMP Health, explica cómo Autonomous Data Warehouse Cloud permitirá a QMP trabajar a mayor velocidad y ofrecer un mejor servicio a sus clientes en la industria sanitaria.
+
+Véalo ahora (1:44)
+Transición a Autonomous Data Warehouse Cloud
+Benjamin Arnulf, director de Analítica e inteligencia empresarial de Hertz Corporation, habla de la transición a Oracle Autonomous Data Warehouse Cloud.
+
+Véalo ahora (0:58)
+Escalabilidad de la analítica con Oracle Autonomous Data Warehouse Cloud
+El experto en analítica Tim Vlamis explica cómo Oracle Autonomous Data Warehouse Cloud puede contribuir al inicio progresivo y al fácil crecimiento de la analítica.
+
+Véalo ahora (0:43)
+Experiencia sencilla, rápida y flexible con Autonomous Data Warehouse Cloud
+Steve Chamberlin, consejero delegado de Sensa Analytics, analiza su experiencia de uso de Autonomous Data Warehouse Cloud en cuanto a facilidad de uso, velocidad de ejecución y flexibilidad.
+
+Véalo ahora (1:06)
+Cyracom apuesta por una estrategia de RRHH digital con Oracle Integration Cloud
+El analista de TI de aplicaciones sénior Charandeep Hora revela cómo Cyracom ha conseguido recortar gastos con una estrategia de precios BYOL (Bring Your Own License) y reducir el plazo de incorporación efectiva de los nuevos empleados en un 95% gracias a Oracle Autonomous Integration Cloud con una mentalidad de diseño esencialmente basada en API.
+
+Véalo ahora (0:58)
+Show more
+Oracle Database Insider
+Últimos blogs e información clave
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PreviousNext
+1
+2
+3
+4
+5
+Comience ahora
+ 
+Prueba gratuita en la nube
+ 
+Tutorial
+ 
+Contacto
+ 
+Síganos
+Contáctenos
+Teléfono: +34 91 6036188
+Contactos globales
+Directorio de soporte
+Suscríbase a nuestros correos electrónicos
+Acerca de Oracle
+Oportunidades profesionales
+Información de empresa
+Civismo corporativo
+Comunidades
+Descargas y pruebas
+Entornos de tiempo de ejecución de Java (JRE)
+Java para desarrolladores
+Todas las descargas y pruebas
+Prueba gratuita de la nube
+Noticias y eventos
+Adquisiciones
+Blogs
+Eventos
+Sala de prensa
+Facebook
+Twitter
+LinkedIn
+YouTube
+Oracle
+© OracleMapa del sitioCondiciones de uso y privacidad
+Preferencias para cookies
+Opciones de anuncios 
+Chat

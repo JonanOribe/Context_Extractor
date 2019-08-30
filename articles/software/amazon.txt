@@ -1,0 +1,198 @@
+﻿Haga clic aquí para volver a la página de inicio de Amazon Web Services
+Póngase en contacto con el departamento de ventas
+Soporte 
+Español 
+Mi cuenta 
+Productos Soluciones Precios Documentación Más información Red de socios AWS Marketplace Capacitación para clientes Más información
+Comience a crear con AWS hoy mismo
+Independientemente de si necesita potencia de cómputo, almacenamiento para bases de datos, entrega de contenido u otra funcionalidad, AWS cuenta con los servicios necesarios para ayudarlo a crear aplicaciones sofisticadas con mayor flexibilidad, escalabilidad y fiabilidad
+Consulte los detalles de la capa gratuita de AWS 
+COMIENCE HOY MISMO
+Amazon Lightsail
+Todo lo que necesita para empezar a usar los productos de AWS, a un precio bajo y predecible
+Inscríbase de forma gratuita  
+1
+Regístrese para abrir una cuenta de AWS
+Obtenga acceso automáticamente a la capa gratuita de AWS
+2
+Aprenda con tutoriales de 10 minutos
+Lea y aprenda con tutoriales sencillos
+3
+Comience a crear con AWS
+Comience a crear con las guías paso a paso, que lo ayudarán a lanzar un proyecto en AWS
+Conozca nuestros productos
+Amazon Athena
+Consulte datos en S3 con SQL
+Amazon CloudSearch
+Servicio de búsqueda administrado
+Amazon EMR
+Infraestructura Hadoop hospedada
+Amazon Elasticsearch Service
+Ejecute y escale clústeres de Elasticsearch
+Amazon Kinesis
+Analice transmisiones de datos y videos en tiempo real
+Amazon Managed Streaming for Apache Kafka
+Servicio Apache Kafka completamente administrado
+Amazon Redshift
+Almacenamiento de datos rápido, sencillo y rentable
+Amazon QuickSight
+Servicio rápido de análisis empresarial
+AWS Data Pipeline
+Servicio de organización para flujos de trabajo periódicos basados en datos
+AWS Glue
+Prepare y cargue datos
+AWS Lake Formation
+Cree un lago de datos seguro en cuestión de días
+AWS Step Functions
+Coordinación para las aplicaciones distribuidas
+Amazon EventBridge
+Bus de eventos sin servidor para aplicaciones de SaaS y servicios de AWS
+Amazon MQ
+Agente de mensajes administrado para ActiveMQ
+Amazon Simple Notification Service (SNS)
+Temas de mensajes administrados para publicación/suscripción
+Amazon Simple Queue Service (Amazon SQS)
+Colas de mensajes administradas
+AWS AppSync
+Utilice datos correctos provenientes de varios orígenes para alimentar sus aplicaciones a escala
+Amazon Sumerian
+Cree y ejecute aplicaciones de RV y RA
+AWS Cost Explorer
+Analice el uso y el costo de AWS
+Presupuestos de AWS
+Defina presupuestos personalizados del uso y el costo
+Informe de uso y costo de AWS
+Obtenga acceso a información detallada de costo y uso
+Informes de instancias reservadas
+Conozca a fondo sus instancias reservadas (RI)
+Amazon Managed Blockchain
+Cree y administre redes de cadenas de bloques escalables
+Amazon Quantum Ledger Database (QLDB)
+Base de datos de libro mayor completamente administrada
+Respaldamos la innovación de los clientes
+Logo_Statcast-AI
+La MLB selecciona a AWS como proveedor oficial del servicio de aprendizaje automático
+Descubra de qué manera la Liga de Béisbol Profesional de Estados Unidos le da sentido a las estadísticas a través de AWS Machine Learning
+Más información 
+Una base para el aprendizaje profundo
+La MLB ha recopilado datos estadísticos sobre sus jugadores y clubes durante décadas. En 2015, comenzó a usar servicios de AWS para recopilar y distribuir estadísticas de los partidos del día a fin de mejorar la experiencia de los seguidores.
+Mayor capacidad de acción para los desarrolladores
+Gracias a Amazon Sagemaker, la MLB puede permitir a sus desarrolladores y científicos de datos crear, entrenar e implementar de manera rápida y fácil modelos de aprendizaje automático a escala.
+Menor carga
+Estos modelos ayudan a la MLB a eliminar procesos manuales y que consumen mucho tiempo asociados con las estadísticas y la conservación de registros, como el almacenamiento de puntajes, el registro de las notas sobre los partidos y la clasificación de los lanzamientos.
+Personalización de partidos
+El objetivo de la MLB es trabajar con Amazon ML Solutions Lab para continuar mejorando Statcast (su tecnología de seguimiento que analiza el rendimiento de los jugadores) incluida las pruebas de la precisión de las predicciones de los lanzamientos y la creación de experiencias personalizadas para los espectadores.
+Un jonrón con inteligencia artificial
+La MLB continuará innovado mediante el uso de inteligencia artificial La organización planea utilizar Amazon Comprehend para crear un modelo de lenguaje que pueda crear secuencias de comandos para partidos en directo que simulen presentadores emblemáticos.
+AWSMP_logo_new-RGB
+Buscar. Comprar. Implementar.
+AWS Marketplace es un catálogo digital con miles de productos de software de proveedores de software independientes que facilitan la búsqueda, la aplicación de pruebas, la compra y la implementación de software que se ejecuta en AWS.
+Más información 
+Analice nuestras soluciones
+60-machine-learning
+Aprendizaje automático
+Cree soluciones con plataformas y servicios eficientes, y con la compatibilidad con marcos de aprendizaje automático más amplia disponible.
+MÁS INFORMACIÓN
+60-analytics
+Análisis y lagos de datos
+Almacene, categorice y analice de manera segura todos sus datos en un único repositorio centralizado.
+MÁS INFORMACIÓN
+60-IoT
+Internet de las cosas
+Un sistema de dispositivos amplios que conectan el mundo físico con la nube.
+MÁS INFORMACIÓN
+60-serverless
+Informática sin servidor
+Cree y ejecute aplicaciones y servicios sin preocuparse por los servidores.
+MÁS INFORMACIÓN
+60-containers
+Contenedores
+Empaquete e implemente aplicaciones ligeras y proporcione un entorno de software estable y portátil para poder ejecutar de forma sencilla las aplicaciones y escalarlas en cualquier ubicación.
+MÁS INFORMACIÓN
+60-enterprise
+Aplicaciones empresariales
+Cree con un conjunto sólido de servicios específicamente diseñados para cumplir los requisitos únicos de seguridad, conformidad, privacidad y gestión de las grandes organizaciones.
+MÁS INFORMACIÓN
+60-storage
+Almacenamiento
+Opciones duraderas y rentables para copias de seguridad, recuperación de desastres y archivo de datos a escala de petabytes.
+MÁS INFORMACIÓN
+60-windows-workloads
+Cargas de trabajo de Windows
+Capacidad de cómputo flexible y escalable para aplicaciones de Microsoft. Administre y proteja cargas de trabajo de Windows de forma segura.
+MÁS INFORMACIÓN
+Ver todas las soluciones 
+Diseñado para satisfacer los requisitos más exigentes
+Seguridad
+Funciones de seguridad integrales para cumplir los requisitos más exigentes.
+Conformidad
+Controles mejorados, auditoría y acreditaciones para una seguridad completa.
+Solución híbrida
+Cree arquitecturas híbridas para ampliar la infraestructura local en la nube.
+Escalabilidad
+Obtenga acceso a los recursos que necesite y aumente o reduzca la escala con unos pocos minutos de anticipación.
+Conozca de qué manera nuestros clientes crean soluciones en AWS
+
+
+
+
+
+
+
+
+
+
+
+
+Vea todas las historias de clientes 
+Red global de regiones de AWS
+La nube de AWS incluye 69 zonas de disponibilidad en 22 regiones geográficas de todo el mundo. Además, se anunciaron planes para incorporar 9 zonas de disponibilidad y 4 regiones adicionales en Baréin, Ciudad del Cabo, Yakarta y Milán.
+ Regiones
+ Próximamente
+Más información 
+ 
+Informes de analistas
+Lea lo que dicen sobre AWS analistas destacados, como Gartner e IDC
+ 
+AWS Training
+Cursos digitales gratuitos que lo ayudan a desarrollar sus habilidades
+ 
+Red de socios de AWS
+Únase a la red de socios de AWS para crear y ampliar su negocio en la nube
+ 
+AWS Marketplace
+Lance una variedad de software conocidos en AWS en cuestión de minutos
+Información sobre AWS
+¿Qué es AWS?
+¿Qué es la informática en la nube?
+¿Qué es DevOps?
+¿Qué es un contenedor?
+¿Qué es un lago de datos?
+Seguridad en la nube de AWS
+Novedades
+Blogs
+Recursos para AWS
+Introducción
+Formación técnica y certificación
+Cartera de soluciones de AWS
+Centro de arquitectura
+Preguntas frecuentes sobre cuestiones técnicas y productos
+Informes de analistas
+Red de socios de AWS
+Desarrolladores en AWS
+Centro de desarrolladores
+SDK y herramientas
+Python en AWS
+Java en AWS
+PHP en AWS
+JavaScript en AWS
+Ayuda
+Contáctenos
+Oportunidades de trabajo en AWS
+Abra un tique de soporte técnico
+Centro de conocimientos
+Información general de AWS Support
+Legal
+Amazon es un empleador que ofrece igualdad de oportunidades: minorías, mujeres, discapacitados, veteranos, identidad de género, orientación sexual/edad.
+Idioma عربي Bahasa Indonesia Deutsch English Español Français Italiano Português Tiếng Việt Türkçe Ρусский ไทย 日本語 한국어 中文 (简体) 中文 (繁體)
+Privacidad | Términos del sitio | © 2019, Amazon Web Services, Inc. o sus empresas afiliadas. Todos los derechos reservados.

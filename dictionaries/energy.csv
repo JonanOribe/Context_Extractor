@@ -1,8 +1,6 @@
 Word;Count
-contenido;10
 gas;17
 electricidad;36
-casa;11
 energía;66
 cliente;9
 tarifa;19
@@ -21,7 +19,6 @@ energías;4
 viento;9
 mareas;5
 carbón;5
-aire;9
 zona;4
 contador;5
 facturas;5
@@ -42,14 +39,9 @@ fuerza;4
 solares;5
 fuente;4
 temperaturas;4
-año;8
 contacto;4
-clientes;4
 precios;10
 kwh;7
-hora;6
-horas;9
-descuento;4
 necesitas;4
 ayuda;4
 hogar;8

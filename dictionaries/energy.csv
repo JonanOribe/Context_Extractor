@@ -1,6 +1,5 @@
 Word;Count
 contenido;10
-empresa;6
 gas;17
 electricidad;36
 casa;11
@@ -10,13 +9,10 @@ tarifa;19
 luz;16
 lugar;4
 consumo;6
-día;6
 factura;9
-datos;4
 manera;5
 origen;4
 interior;5
-vida;5
 calor;14
 movimiento;8
 corriente;6
@@ -29,11 +25,8 @@ aire;9
 zona;4
 contador;5
 facturas;5
-mercado;12
 contrato;4
-sistema;9
 central;4
-tipo;4
 ciclo;6
 temperatura;4
 agua;33
@@ -47,12 +40,10 @@ molinos;5
 células;6
 fuerza;4
 solares;5
-forma;5
 fuente;4
 temperaturas;4
 año;8
 contacto;4
-precio;10
 clientes;4
 precios;10
 kwh;7

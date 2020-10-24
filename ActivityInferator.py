@@ -5,12 +5,21 @@ from spacy.lang.es.examples import sentences
 
 import requests
 
+import configparser
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+os.chdir(dir_path)
+
 #spacy.load('es')
 
 nlp = spacy.load('es_core_news_sm')
 arr_points_values=[12,8,6,2]
 ENCODING='utf8'
 SEPARATOR=';'
+
+config = configparser.RawConfigParser()
+config.read('config_file.ini',encoding=ENCODING)
+dictionaries_path=config['DEFAULT']['dictionaries_path']
 
 #Generate dictionaries
 articles_path = './articles/'
@@ -41,10 +50,9 @@ for r, d, f in os.walk(articles_path):
             df = pd.DataFrame()
             df['Word']=words_dict.keys()
             df['Count']=words_dict.values()
-            df.to_csv('{}{}{}'.format('../Inferator/dictionaries/',directory,'.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
+            df.to_csv('{}{}{}'.format(dictionaries_path,directory,'.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Cleaning data
-dictionaries_path = './dictionaries/'
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
         print(dictionaries_path)
@@ -87,8 +95,8 @@ MacroDict_with_words_out_of_bounds=Macro_df[Macro_df.Count >= top_count]
 
 print('Discarded words:')
 print(MacroDict_with_words_out_of_bounds)
-Macro_df_with_filter.to_csv('../Inferator/macro-dictionary/macro-dictionary.csv',sep=SEPARATOR,encoding=ENCODING,index=False)
-MacroDict_with_words_out_of_bounds.to_csv('../Inferator/macro-dictionary/macro-dictionary-out-of-bounds.csv',sep=SEPARATOR,encoding=ENCODING,index=False)
+Macro_df_with_filter.to_csv('./macro-dictionary/macro-dictionary.csv',sep=SEPARATOR,encoding=ENCODING,index=False)
+MacroDict_with_words_out_of_bounds.to_csv('./macro-dictionary/macro-dictionary-out-of-bounds.csv',sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Cleaning data with words out of bounds
 out_of_bounds=MacroDict_with_words_out_of_bounds['Word'].array

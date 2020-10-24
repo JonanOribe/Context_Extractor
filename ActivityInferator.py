@@ -1,11 +1,10 @@
 import os
 import pandas as pd
 import spacy
-from spacy.lang.es.examples import sentences
-
 import requests
-
 import configparser
+from termcolor import colored
+from spacy.lang.es.examples import sentences
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
@@ -58,7 +57,6 @@ for r, d, f in os.walk(dictionaries_path):
         print(dictionaries_path)
         print(file)
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
-        #print(df)
         quantile=df['Count'].quantile(.8)
         print(quantile)
         df=df[df.Count > quantile]
@@ -73,7 +71,6 @@ number_of_dicts=0
 for r, d, f in os.walk(dictionaries_path):
     number_of_dicts=len(f)
     for file in f:
-        print(dictionaries_path)
         print(file)
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         for index, row in df.iterrows():
@@ -103,7 +100,6 @@ out_of_bounds=MacroDict_with_words_out_of_bounds['Word'].array
 
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
-        print(dictionaries_path)
         print(file)
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
 
@@ -118,12 +114,9 @@ for r, d, f in os.walk(dictionaries_path):
 
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
-        print(dictionaries_path)
-        print(file)
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         df['Points']=0
         arr_points=[]
-        #print(df['Points'])
         df_len=len(df)
         df_top_10_percent=round((df_len/100)*10)
         df_top_20_percent=round((df_len/100)*20)
@@ -173,14 +166,10 @@ for token in doc_candidate:
 df_from_candidate = pd.DataFrame()
 df_from_candidate['Word']=words_dict_candidate.keys()
 df_from_candidate['Count']=words_dict_candidate.values()
-#df.to_csv('../Inferator/dictionaries/'+directory+'.csv',sep=';',encoding='utf8',index=False)
 
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
-        print(dictionaries_path)
-        print(file)
-        count=0
-        points=0
+        count=points=0
         df_words={}
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         for index, row in df.iterrows():
@@ -188,8 +177,6 @@ for r, d, f in os.walk(dictionaries_path):
         df_words_keys=df_words.keys()
         for index, row in df_from_candidate.iterrows():
             if row['Word'] in df_words_keys:
-                #print(row['Word'])
                 points=points+df_words[row['Word']]
                 count=count+1
-        print(file+": "+str(count)+" similarities with "+str(points)+" points")
-
+        print((colored(file+": "+str(count)+" similarities with "+str(points)+" points", 'green')))

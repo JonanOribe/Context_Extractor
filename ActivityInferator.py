@@ -3,6 +3,7 @@ import pandas as pd
 import spacy
 import requests
 import configparser
+import operator
 from termcolor import colored
 from spacy.lang.es.examples import sentences
 
@@ -22,6 +23,7 @@ dictionaries_path=config['DEFAULT']['dictionaries_path']
 
 #Generate dictionaries
 articles_path = './articles/'
+final_result_dict={}
 
 for r, d, f in os.walk(articles_path):
     for directory in d:
@@ -179,4 +181,7 @@ for r, d, f in os.walk(dictionaries_path):
             if row['Word'] in df_words_keys:
                 points=points+df_words[row['Word']]
                 count=count+1
-        print((colored(file+": "+str(count)+" similarities with "+str(points)+" points", 'green')))
+        str_points=str(points)
+        final_result_dict[file.split('.csv')[0].title()]=str_points
+    final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
+    print((colored(final_result_dict, 'green')))

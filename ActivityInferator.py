@@ -31,9 +31,7 @@ for r, d, f in os.walk(articles_path):
         dictionary_for_keywords=[]
         words_dict={}
         for r2,d2,f2 in os.walk(path2):
-            print(path2)
             for file in f2:
-                print(file)
                 articleFile = open('{}{}{}'.format(path2,'/',file),'r',encoding=ENCODING)
                 article=articleFile.read()
 
@@ -47,7 +45,6 @@ for r, d, f in os.walk(articles_path):
                             words_dict[word]=words_dict[word]+1
                         else:
                             words_dict[word]=1
-            print(words_dict)
             df = pd.DataFrame()
             df['Word']=words_dict.keys()
             df['Count']=words_dict.values()
@@ -56,13 +53,9 @@ for r, d, f in os.walk(articles_path):
 #Cleaning data
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
-        print(dictionaries_path)
-        print(file)
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         quantile=df['Count'].quantile(.8)
-        print(quantile)
         df=df[df.Count > quantile]
-        print(df)
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Filter common words between dictionaries
@@ -73,7 +66,6 @@ number_of_dicts=0
 for r, d, f in os.walk(dictionaries_path):
     number_of_dicts=len(f)
     for file in f:
-        print(file)
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         for index, row in df.iterrows():
             word=row['Word']
@@ -102,7 +94,6 @@ out_of_bounds=MacroDict_with_words_out_of_bounds['Word'].array
 
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
-        print(file)
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
 
         for index, row in df.iterrows():
@@ -142,11 +133,11 @@ for r, d, f in os.walk(dictionaries_path):
 
 #Crawling the candidate URL
 #r = requests.get('https://www.nissan.es/experiencia-nissan.html')
-#r = requests.get('http://www.x-plane.es/')
+r = requests.get('http://www.x-plane.es/')
 #r = requests.get('https://www.milanuncios.com/barcos-a-motor-en-vizcaya/')
 #r = requests.get('https://www.cosasdebarcos.com/barcos-ocasion/en-vizcaya-49/')
 #r = requests.get('https://www.google.com/intl/es_ALL/drive/using-drive/')
-r = requests.get('https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/')
+#r = requests.get('https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/')
 #r = requests.get('https://www.ford.es/')
 #r = requests.get('https://www.mi.com/es')
 
@@ -181,7 +172,6 @@ for r, d, f in os.walk(dictionaries_path):
             if row['Word'] in df_words_keys:
                 points=points+df_words[row['Word']]
                 count=count+1
-        str_points=str(points)
-        final_result_dict[file.split('.csv')[0].title()]=str_points
+        final_result_dict[file.split('.csv')[0].title()]=points
     final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
     print((colored(final_result_dict, 'green')))

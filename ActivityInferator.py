@@ -10,9 +10,7 @@ from spacy.lang.es.examples import sentences
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 
-#spacy.load('es')
-
-nlp = spacy.load('es_core_news_sm')
+nlp = spacy.load('en_core_web_sm')
 arr_points_values=[12,8,6,2]
 ENCODING='utf8'
 SEPARATOR=';'

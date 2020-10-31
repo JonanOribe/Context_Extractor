@@ -17,18 +17,16 @@ ENCODING='utf8'
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
 nlp = spacy.load('en_core_web_sm')
-arr_points_values=config['DEFAULT']['arr_points'].split(',')
-arr_points_values=list(map(lambda x: int(x), arr_points_values))
-ENCODING='utf8'
-SEPARATOR=config['DEFAULT']['separator']
 
-config = configparser.RawConfigParser()
-config.read('config_file.ini',encoding=ENCODING)
+SEPARATOR=config['DEFAULT']['separator']
 dictionaries_path=config['DEFAULT']['dictionaries_path']
 articles_path = config['DEFAULT']['articles_path']
 macro_dictionaries_path = config['DEFAULT']['macro_dictionaries_path']
 max_len=int(config['DEFAULT']['max_len'])
 min_len=int(config['DEFAULT']['min_len'])
+arr_points_values=config['DEFAULT']['arr_points'].split(',')
+arr_points_values=list(map(lambda x: int(x), arr_points_values))
+
 final_result_dict={}
 
 #Launch crawler

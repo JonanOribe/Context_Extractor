@@ -7,7 +7,7 @@ import re
 import configparser
 from termcolor import colored
 from functools import wraps
-import time
+from time import time
 from main_classes import Company
 
 ENCODING='utf8'
@@ -33,11 +33,12 @@ def timing(f):
         ts = time()
         result = f(*args, **kw)
         te = time()
-        print ('func:%r args:[%r, %r] took: %2.4f sec' % \
-          (f.__name__, args, kw, te-ts))
+        print (colored('>>>func:%r args:[%r, %r] took: %2.4f sec' % \
+          (f.__name__, args, kw, te-ts),'green'))
         return result
     return wrap
 
+@timing
 def web_crawler():
   folder_cleaner(articles_path)
   folder_cleaner(dictionaries_path)

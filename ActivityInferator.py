@@ -4,6 +4,7 @@ import spacy
 import requests
 import configparser
 import operator
+from pathlib import Path
 from termcolor import colored
 from spacy.lang.es.examples import sentences
 from main_utils import web_crawler
@@ -30,10 +31,10 @@ final_result_dict={}
 web_crawler()
 
 for r, d, f in os.walk(articles_path):
-    ionary_for_keywords=[]
-    words_dict={}
     for file in f:
+        words_dict={}
         file_type=file.split('_')[0]
+        dictionary_file=file_type+'.csv'
         articleFile = open('{}{}{}'.format(r,'/',file),'r',encoding=ENCODING)
         article=articleFile.read()
 
@@ -47,17 +48,31 @@ for r, d, f in os.walk(articles_path):
                     words_dict[word]=words_dict[word]+1
                 else:
                     words_dict[word]=1
-    df = pd.DataFrame()
-    df['Word']=words_dict.keys()
-    df['Count']=words_dict.values()
-    df.to_csv('{}{}{}'.format(dictionaries_path,file_type,'.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
+        df_temp = pd.DataFrame()
+        df_temp['Word']=words_dict.keys()
+        df_temp['Count']=words_dict.values()
+        file_path = Path('{}{}'.format(dictionaries_path,dictionary_file))
+        if file_path.is_file():
+            df=pd.read_csv('{}{}'.format(dictionaries_path,dictionary_file),sep=SEPARATOR)
+            df_temp=df_temp.append(df, ignore_index=True)
+
+        df_temp.to_csv('{}{}'.format(dictionaries_path,dictionary_file),sep=SEPARATOR,encoding=ENCODING,index=False)
+
+for r, d, f in os.walk(dictionaries_path):
+    for file in f:
+        df_temp=pd.read_csv('{}{}'.format(dictionaries_path,file),sep=SEPARATOR)
+        df_temp['Total']=df_temp.groupby(['Word'])['Count'].transform('sum')
+        del df_temp['Count']
+        df_temp=df_temp.drop_duplicates(keep = 'first')
+        df_temp=df_temp.sort_values(by='Total',ascending=False)
+        df_temp.to_csv('{}{}'.format(dictionaries_path,file),sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Cleaning data
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
-        quantile=df['Count'].quantile(.8)
-        df=df[df.Count > quantile]
+        quantile=df['Total'].quantile(.8)
+        df=df[df.Total > quantile]
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Filter common words between dictionaries

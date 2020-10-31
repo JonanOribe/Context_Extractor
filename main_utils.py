@@ -16,6 +16,8 @@ config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
 webs_to_scrapp=config['DEFAULT']['webs_to_scrapp']
 articles_path=config['DEFAULT']['articles_path']
+dictionaries_path=config['DEFAULT']['dictionaries_path']
+macro_dictionaries_path=config['DEFAULT']['macro_dictionaries_path']
 SEPARATOR=config['DEFAULT']['separator']
 
 web_type_and_url_dict={}
@@ -37,7 +39,9 @@ def timing(f):
     return wrap
 
 def web_crawler():
-  folder_cleaner()
+  folder_cleaner(articles_path)
+  folder_cleaner(dictionaries_path)
+  folder_cleaner(macro_dictionaries_path)
   companies=web_searcher()
   s = requests.session()
   for company in companies:
@@ -60,7 +64,7 @@ def articles_to_txt(company,content):
   with open("{}{}{}".format(articles_path,company.name,'.txt'), "w") as text_file:
     text_file.write(content)
 
-def folder_cleaner():
+def folder_cleaner(articles_path):
   for filename in os.listdir(articles_path):
       file_path = os.path.join(articles_path, filename)
       try:
@@ -70,5 +74,3 @@ def folder_cleaner():
               shutil.rmtree(file_path)
       except Exception as e:
           print('Failed to delete %s. Reason: %s' % (file_path, e))
-
-web_crawler()

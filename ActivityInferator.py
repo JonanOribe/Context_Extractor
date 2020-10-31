@@ -6,11 +6,15 @@ import configparser
 import operator
 from termcolor import colored
 from spacy.lang.es.examples import sentences
-from main_utils import web_searcher
+from main_utils import web_crawler
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 
+ENCODING='utf8'
+
+config = configparser.RawConfigParser()
+config.read('config_file.ini',encoding=ENCODING)
 nlp = spacy.load('en_core_web_sm')
 arr_points_values=[12,8,6,2]
 ENCODING='utf8'
@@ -19,35 +23,33 @@ SEPARATOR=config['DEFAULT']['separator']
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
 dictionaries_path=config['DEFAULT']['dictionaries_path']
-
-#Generate dictionaries
-articles_path = './articles/'
+articles_path = config['DEFAULT']['articles_path']
 final_result_dict={}
 
+#Launch crawler
+web_crawler()
+
 for r, d, f in os.walk(articles_path):
-    for directory in d:
-        path2=articles_path+directory
-        dictionary_for_keywords=[]
-        words_dict={}
-        for r2,d2,f2 in os.walk(path2):
-            for file in f2:
-                articleFile = open('{}{}{}'.format(path2,'/',file),'r',encoding=ENCODING)
-                article=articleFile.read()
+    ionary_for_keywords=[]
+    words_dict={}
+    for file in f:
+        articleFile = open('{}{}{}'.format(r,'/',file),'r',encoding=ENCODING)
+        article=articleFile.read()
 
-                doc=nlp(article)
+        doc=nlp(article)
 
-                for token in doc:
-                    if(token.pos_=="NOUN" and 24>len(token)>1 and token.text.isnumeric()==False):
-                        word=token.text.lower()
-                        dict_keys=words_dict.keys()
-                        if word in dict_keys:
-                            words_dict[word]=words_dict[word]+1
-                        else:
-                            words_dict[word]=1
-            df = pd.DataFrame()
-            df['Word']=words_dict.keys()
-            df['Count']=words_dict.values()
-            df.to_csv('{}{}{}'.format(dictionaries_path,directory,'.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
+        for token in doc:
+            if(token.pos_=="NOUN" and 24>len(token)>1 and token.text.isnumeric()==False):
+                word=token.text.lower()
+                dict_keys=words_dict.keys()
+                if word in dict_keys:
+                    words_dict[word]=words_dict[word]+1
+                else:
+                    words_dict[word]=1
+    df = pd.DataFrame()
+    df['Word']=words_dict.keys()
+    df['Count']=words_dict.values()
+    df.to_csv('{}{}{}'.format(dictionaries_path,directory,'.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Cleaning data
 for r, d, f in os.walk(dictionaries_path):

@@ -17,7 +17,8 @@ ENCODING='utf8'
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
 nlp = spacy.load('en_core_web_sm')
-arr_points_values=[12,8,6,2]
+arr_points_values=config['DEFAULT']['arr_points'].split(',')
+arr_points_values=list(map(lambda x: int(x), arr_points_values))
 ENCODING='utf8'
 SEPARATOR=config['DEFAULT']['separator']
 
@@ -158,8 +159,8 @@ for r, d, f in os.walk(dictionaries_path):
 #r = requests.get('https://www.cosasdebarcos.com/barcos-ocasion/en-vizcaya-49/')
 #r = requests.get('https://www.google.com/intl/es_ALL/drive/using-drive/')
 #r = requests.get('https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/')
-#r = requests.get('https://www.ford.es/')
-r = requests.get('https://www.mi.com/es')
+r = requests.get('https://www.ford.es/')
+#r = requests.get('https://www.mi.com/es')
 
 candidate_text=r.text
 

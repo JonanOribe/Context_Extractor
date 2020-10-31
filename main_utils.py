@@ -11,12 +11,12 @@ import time
 from main_classes import Company
 
 ENCODING='utf8'
-SEPARATOR=';'
 
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
 webs_to_scrapp=config['DEFAULT']['webs_to_scrapp']
 articles_path=config['DEFAULT']['articles_path']
+SEPARATOR=config['DEFAULT']['separator']
 
 web_type_and_url_dict={}
 
@@ -59,7 +59,7 @@ def web_searcher():
 def articles_to_txt(company,content):
   with open("{}{}{}".format(articles_path,company.name,'.txt'), "w") as text_file:
     text_file.write(content)
-  
+
 def folder_cleaner():
   for filename in os.listdir(articles_path):
       file_path = os.path.join(articles_path, filename)

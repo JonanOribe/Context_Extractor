@@ -14,7 +14,7 @@ os.chdir(dir_path)
 nlp = spacy.load('en_core_web_sm')
 arr_points_values=[12,8,6,2]
 ENCODING='utf8'
-SEPARATOR=';'
+SEPARATOR=config['DEFAULT']['separator']
 
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)

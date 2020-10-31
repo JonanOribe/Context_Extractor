@@ -61,7 +61,7 @@ def web_searcher():
   return companies
 
 def articles_to_txt(company,content):
-  with open("{}{}{}".format(articles_path,company.name,'.txt'), "w") as text_file:
+  with open("{}{}{}{}{}".format(articles_path,company.type,'_',company.name,'.txt'), "w") as text_file:
     text_file.write(content)
 
 def folder_cleaner(articles_path):

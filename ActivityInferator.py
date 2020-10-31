@@ -33,6 +33,7 @@ for r, d, f in os.walk(articles_path):
     ionary_for_keywords=[]
     words_dict={}
     for file in f:
+        file_type=file.split('_')[0]
         articleFile = open('{}{}{}'.format(r,'/',file),'r',encoding=ENCODING)
         article=articleFile.read()
 
@@ -49,7 +50,7 @@ for r, d, f in os.walk(articles_path):
     df = pd.DataFrame()
     df['Word']=words_dict.keys()
     df['Count']=words_dict.values()
-    df.to_csv('{}{}{}'.format(dictionaries_path,directory,'.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
+    df.to_csv('{}{}{}'.format(dictionaries_path,file_type,'.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Cleaning data
 for r, d, f in os.walk(dictionaries_path):

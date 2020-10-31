@@ -33,7 +33,7 @@ def timing(f):
         ts = time()
         result = f(*args, **kw)
         te = time()
-        print (colored('>>>func:%r args:[%r, %r] took: %2.4f sec' % \
+        print (colored('>>> func:%r args:[%r, %r] took: %2.4f sec' % \
           (f.__name__, args, kw, te-ts),'green'))
         return result
     return wrap

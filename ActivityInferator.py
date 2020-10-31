@@ -25,6 +25,9 @@ config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
 dictionaries_path=config['DEFAULT']['dictionaries_path']
 articles_path = config['DEFAULT']['articles_path']
+macro_dictionaries_path = config['DEFAULT']['macro_dictionaries_path']
+max_len=int(config['DEFAULT']['max_len'])
+min_len=int(config['DEFAULT']['min_len'])
 final_result_dict={}
 
 #Launch crawler
@@ -41,7 +44,7 @@ for r, d, f in os.walk(articles_path):
         doc=nlp(article)
 
         for token in doc:
-            if(token.pos_=="NOUN" and 24>len(token)>1 and token.text.isnumeric()==False):
+            if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.text.isnumeric()==False):
                 word=token.text.lower()
                 dict_keys=words_dict.keys()
                 if word in dict_keys:
@@ -103,8 +106,8 @@ MacroDict_with_words_out_of_bounds=Macro_df[Macro_df.Count >= top_count]
 
 print('Discarded words:')
 print(MacroDict_with_words_out_of_bounds)
-Macro_df_with_filter.to_csv('./macro-dictionary/macro-dictionary.csv',sep=SEPARATOR,encoding=ENCODING,index=False)
-MacroDict_with_words_out_of_bounds.to_csv('./macro-dictionary/macro-dictionary-out-of-bounds.csv',sep=SEPARATOR,encoding=ENCODING,index=False)
+Macro_df_with_filter.to_csv('{}{}'.format(macro_dictionaries_path,'macro-dictionary.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
+MacroDict_with_words_out_of_bounds.to_csv('{}{}'.format(macro_dictionaries_path,'macro-dictionary-out-of-bounds.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Cleaning data with words out of bounds
 out_of_bounds=MacroDict_with_words_out_of_bounds['Word'].array
@@ -117,7 +120,7 @@ for r, d, f in os.walk(dictionaries_path):
             if row['Word'] in out_of_bounds:
                 df.drop([index], inplace=True)
 
-        df.sort_values(by=['Count'], ascending=False,inplace=True)
+        df.sort_values(by=['Total'], ascending=False,inplace=True)
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #SORTING THE DATA BY COUNTS AND Adding weigths
@@ -150,13 +153,13 @@ for r, d, f in os.walk(dictionaries_path):
 
 #Crawling the candidate URL
 #r = requests.get('https://www.nissan.es/experiencia-nissan.html')
-r = requests.get('http://www.x-plane.es/')
+#r = requests.get('http://www.x-plane.es/')
 #r = requests.get('https://www.milanuncios.com/barcos-a-motor-en-vizcaya/')
 #r = requests.get('https://www.cosasdebarcos.com/barcos-ocasion/en-vizcaya-49/')
 #r = requests.get('https://www.google.com/intl/es_ALL/drive/using-drive/')
 #r = requests.get('https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/')
 #r = requests.get('https://www.ford.es/')
-#r = requests.get('https://www.mi.com/es')
+r = requests.get('https://www.mi.com/es')
 
 candidate_text=r.text
 
@@ -166,7 +169,7 @@ words_dict_candidate={}
 
 for token in doc_candidate:
     if('/' not in token.text and '<' not in token.text and '=' not in token.text):
-        if(token.pos_=="NOUN" and 24>len(token)>1 and token.text.isnumeric()==False):
+        if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.text.isnumeric()==False):
             word=token.text.lower()
             dict_keys=words_dict_candidate.keys()
             if word in dict_keys:

@@ -6,6 +6,7 @@ import configparser
 import operator
 from termcolor import colored
 from spacy.lang.es.examples import sentences
+from main_utils import web_searcher
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)

@@ -7,7 +7,7 @@ import operator
 from pathlib import Path
 from termcolor import colored
 from spacy.lang.es.examples import sentences
-from main_utils import articles_len_filter, df_words_clustering_by_percent, dictionaries_cleaner_by_quantile, macro_dictionaries_filter, text_cleaner, web_crawler, words_classification
+from main_utils import articles_len_filter, df_words_clustering_by_percent, dictionaries_cleaner_by_quantile, macro_dictionaries_filter, predict_new_website_context, text_cleaner, web_crawler, words_classification
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
@@ -27,9 +27,7 @@ arr_points_values=config['DEFAULT']['arr_points'].split(',')
 
 arr_points_values=list(map(lambda x: int(x), arr_points_values))
 
-final_result_dict={}
 macroDictionary_dict={}
-words_dict_candidate={}
 macroDictionary=[]
 
 #Launch crawler
@@ -115,38 +113,4 @@ for r, d, f in os.walk(dictionaries_path):
         df['Points']=arr_points
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
-#Crawling the candidate URL
-#r = requests.get('https://www.nissan.es/experiencia-nissan.html')
-#r = requests.get('http://www.x-plane.es/')
-#r = requests.get('https://www.milanuncios.com/barcos-a-motor-en-vizcaya/')
-#r = requests.get('https://www.cosasdebarcos.com/barcos-ocasion/en-vizcaya-49/')
-#r = requests.get('https://www.google.com/intl/es_ALL/drive/using-drive/')
-#r = requests.get('https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/')
-r = requests.get('https://www.ford.es/')
-#r = requests.get('https://www.mi.com/es')
-
-candidate_text=text_cleaner(r.text)
-
-doc_candidate=nlp(candidate_text)
-
-words_classification(doc_candidate,words_dict_candidate)
-
-df_from_candidate = pd.DataFrame()
-df_from_candidate['Word']=words_dict_candidate.keys()
-df_from_candidate['Count']=words_dict_candidate.values()
-
-for r, d, f in os.walk(dictionaries_path):
-    for file in f:
-        count=points=0
-        df_words={}
-        df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
-        for index, row in df.iterrows():
-            df_words[row['Word']]=row['Points']
-        df_words_keys=df_words.keys()
-        for index, row in df_from_candidate.iterrows():
-            if row['Word'] in df_words_keys:
-                points=points+df_words[row['Word']]
-                count=count+1
-        final_result_dict[file.split(file_type)[0].title()]=points
-    final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
-    print(colored(final_result_dict, 'green'))
+predict_new_website_context(nlp)

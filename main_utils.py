@@ -23,9 +23,11 @@ max_len=int(config['DEFAULT']['max_len'])
 min_len=int(config['DEFAULT']['min_len'])
 file_type=config['DEFAULT']['file_type']
 dictionaries_range_for_discard=float(config['DEFAULT']['dictionaries_range_for_discard'])
+quantile=float(config['DEFAULT']['quantile'])
 arr_points_percent=config['DEFAULT']['arr_points_percent'].split(',')
 arr_points_percent=list(map(lambda x: int(x), arr_points_percent))
 
+arr_paths=[articles_path,dictionaries_path,macro_dictionaries_path]
 web_type_and_url_dict={}
 
 def timing(f):
@@ -40,16 +42,15 @@ def timing(f):
     return wrap
 
 def text_cleaner(web_content):
+  #regex = re.compile(r"(<\/\w*>|<\w*>|<\w*|\".*\"|\w*=|'.*')|([^a-zA-Z])")
   regex = re.compile('[^a-zA-Z]')
-  output = regex.sub(' ', web_content)
-  return output
+  return regex.sub(' ', web_content)
 
 @timing
 def web_crawler():
-  folder_cleaner(articles_path)
-  folder_cleaner(dictionaries_path)
-  folder_cleaner(macro_dictionaries_path)
+  map(lambda x: folder_cleaner(x), arr_paths)
   companies=web_searcher()
+  print(colored('This will took a while...','yellow'))
   s = requests.session()
   for company in companies:
     web=company.website
@@ -96,11 +97,12 @@ def words_classification(doc,words_dict):
                 words_dict[word]=1
   return words_dict
 
+def dataframe_percent_and_points(df_len):
+  return list(map(lambda x: round((df_len/100)*x), arr_points_percent))
+
 def df_words_clustering_by_percent(df):
   df_len=len(df)
-  df_top_10_percent=round((df_len/100)*arr_points_percent[0])
-  df_top_20_percent=round((df_len/100)*arr_points_percent[1])
-  df_top_30_percent=round((df_len/100)*arr_points_percent[2])
+  df_top_10_percent,df_top_20_percent,df_top_30_percent=dataframe_percent_and_points(df_len)
   first_range=range(0,df_top_10_percent)
   second_range=range(df_top_10_percent, df_top_20_percent)
   third_range=range(df_top_20_percent, df_top_30_percent)
@@ -119,3 +121,10 @@ def macro_dictionaries_filter(number_of_dicts,macro_df):
   macro_dict_with_words_out_of_bounds.to_csv('{}{}{}'.format(macro_dictionaries_path,'macro-dictionary-out-of-bounds',file_type),sep=SEPARATOR,encoding=ENCODING,index=False)
   #Cleaning data with words out of bounds
   return macro_dict_with_words_out_of_bounds['Word'].array
+
+def dictionaries_cleaner_by_quantile(dictionaries_path):
+  for r, d, f in os.walk(dictionaries_path):
+    for file in f:
+      df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
+      df=df[df.Total > df['Total'].quantile(quantile)]
+      df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)

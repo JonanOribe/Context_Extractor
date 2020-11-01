@@ -7,7 +7,7 @@ import operator
 from pathlib import Path
 from termcolor import colored
 from spacy.lang.es.examples import sentences
-from main_utils import df_words_clustering_by_percent, macro_dictionaries_filter, text_cleaner, web_crawler, words_classification
+from main_utils import df_words_clustering_by_percent, dictionaries_cleaner_by_quantile, macro_dictionaries_filter, text_cleaner, web_crawler, words_classification
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
@@ -68,12 +68,7 @@ for r, d, f in os.walk(dictionaries_path):
         df_temp.to_csv('{}{}'.format(dictionaries_path,file),sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Cleaning data
-for r, d, f in os.walk(dictionaries_path):
-    for file in f:
-        df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
-        quantile=df['Total'].quantile(.8)
-        df=df[df.Total > quantile]
-        df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
+dictionaries_cleaner_by_quantile(dictionaries_path)
 
 #Filter common words between dictionaries
 
@@ -160,4 +155,4 @@ for r, d, f in os.walk(dictionaries_path):
                 count=count+1
         final_result_dict[file.split(file_type)[0].title()]=points
     final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
-    print((colored(final_result_dict, 'green')))
+    print(colored(final_result_dict, 'green'))

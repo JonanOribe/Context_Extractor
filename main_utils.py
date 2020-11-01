@@ -47,8 +47,7 @@ def text_cleaner(web_content):
   return regex.sub(' ', web_content)
 
 def website_info_getter_and_cleaner(session,company):
-    web=company.website
-    r = session.get(web)
+    r = session.get(company.website)
     soup = BeautifulSoup(r.text, 'html.parser')
     web_conten_after_cleaner=text_cleaner(soup.find('body').text)
     articles_to_txt(company,web_conten_after_cleaner)
@@ -88,24 +87,25 @@ def words_classification(doc,words_dict):
   for token in doc:
     if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.text.isnumeric()==False):
             word=token.text.lower()
-            dict_keys=words_dict.keys()
-            if word in dict_keys:
+            if word in words_dict.keys():
                 words_dict[word]=words_dict[word]+1
             else:
                 words_dict[word]=1
   return words_dict
 
+def points_distribution(df_len,points_list):
+  ranges=[]
+  ranges.append(range(0,points_list[0]))
+  ranges.append(range(points_list[0], points_list[1]))
+  ranges.append(range(points_list[1], points_list[2]))
+  ranges.append(range(points_list[2],df_len))
+  return ranges
+
 def dataframe_percent_and_points(df_len):
-  return list(map(lambda x: round((df_len/100)*x), arr_points_percent))
+  return points_distribution(df_len,list(map(lambda x: round((df_len/100)*x), arr_points_percent)))
 
 def df_words_clustering_by_percent(df):
-  df_len=len(df)
-  df_top_10_percent,df_top_20_percent,df_top_30_percent=dataframe_percent_and_points(df_len)
-  first_range=range(0,df_top_10_percent)
-  second_range=range(df_top_10_percent, df_top_20_percent)
-  third_range=range(df_top_20_percent, df_top_30_percent)
-  last_range=range(df_top_30_percent,df_len)
-  return first_range,second_range,third_range,last_range
+  return dataframe_percent_and_points(len(df))
 
 @timing
 def macro_dictionaries_filter(number_of_dicts,macro_df):

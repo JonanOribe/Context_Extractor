@@ -31,7 +31,6 @@ final_result_dict={}
 macroDictionary_dict={}
 words_dict_candidate={}
 macroDictionary=[]
-number_of_dicts=0
 
 #Launch crawler
 web_crawler()
@@ -73,7 +72,6 @@ dictionaries_cleaner_by_quantile(dictionaries_path)
 #Filter common words between dictionaries
 
 for r, d, f in os.walk(dictionaries_path):
-    number_of_dicts=len(f)
     for file in f:
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         for index, row in df.iterrows():
@@ -87,7 +85,7 @@ for r, d, f in os.walk(dictionaries_path):
         Macro_df['Word']=macroDictionary_dict.keys()
         Macro_df['Count']=macroDictionary_dict.values()
 
-out_of_bounds=macro_dictionaries_filter(number_of_dicts,Macro_df)
+out_of_bounds=macro_dictionaries_filter(len(f),Macro_df)
 
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
@@ -106,13 +104,13 @@ for r, d, f in os.walk(dictionaries_path):
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         df['Points']=0
         arr_points=[]
-        first_range,second_range,third_range,last_range=df_words_clustering_by_percent(df)
+        ranges=df_words_clustering_by_percent(df)
 
         for index, row in df.iterrows():
-            if index in first_range: arr_points.append(arr_points_values[0])
-            if index in second_range: arr_points.append(arr_points_values[1])
-            if index in third_range: arr_points.append(arr_points_values[2])
-            if index in last_range: arr_points.append(arr_points_values[3])
+            if index in ranges[0]: arr_points.append(arr_points_values[0])
+            if index in ranges[1]: arr_points.append(arr_points_values[1])
+            if index in ranges[2]: arr_points.append(arr_points_values[2])
+            if index in ranges[3]: arr_points.append(arr_points_values[3])
 
         df['Points']=arr_points
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)

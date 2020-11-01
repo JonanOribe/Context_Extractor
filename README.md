@@ -1,6 +1,8 @@
 # Inferator [![Build Status](https://travis-ci.com/JonanOribe/Inferator.svg?branch=master)](https://travis-ci.com/JonanOribe/Inferator)
 
 
+This project works around the idea of ​​being able to detect the context of a website by analyzing its content automatically.
+
 # Installation of Python´s libraries
 
 pip install -r requirements.txt

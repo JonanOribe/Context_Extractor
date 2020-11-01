@@ -21,6 +21,10 @@ macro_dictionaries_path=config['DEFAULT']['macro_dictionaries_path']
 SEPARATOR=config['DEFAULT']['separator']
 max_len=int(config['DEFAULT']['max_len'])
 min_len=int(config['DEFAULT']['min_len'])
+file_type=config['DEFAULT']['file_type']
+dictionaries_range_for_discard=float(config['DEFAULT']['dictionaries_range_for_discard'])
+arr_points_percent=config['DEFAULT']['arr_points_percent'].split(',')
+arr_points_percent=list(map(lambda x: int(x), arr_points_percent))
 
 web_type_and_url_dict={}
 
@@ -35,7 +39,6 @@ def timing(f):
         return result
     return wrap
 
-@timing
 def text_cleaner(web_content):
   regex = re.compile('[^a-zA-Z]')
   output = regex.sub(' ', web_content)
@@ -65,7 +68,6 @@ def web_searcher():
     companies.append(company)
   return companies
 
-@timing
 def articles_to_txt(company,content):
   with open("{}{}{}{}{}".format(articles_path,company.type,'_',company.name,'.txt'), "w") as text_file:
     text_file.write(content)
@@ -93,3 +95,27 @@ def words_classification(doc,words_dict):
             else:
                 words_dict[word]=1
   return words_dict
+
+def df_words_clustering_by_percent(df):
+  df_len=len(df)
+  df_top_10_percent=round((df_len/100)*arr_points_percent[0])
+  df_top_20_percent=round((df_len/100)*arr_points_percent[1])
+  df_top_30_percent=round((df_len/100)*arr_points_percent[2])
+  first_range=range(0,df_top_10_percent)
+  second_range=range(df_top_10_percent, df_top_20_percent)
+  third_range=range(df_top_20_percent, df_top_30_percent)
+  last_range=range(df_top_30_percent,df_len)
+  return first_range,second_range,third_range,last_range
+
+@timing
+def macro_dictionaries_filter(number_of_dicts,macro_df):
+  #How many times a word can appear in the dictionaries before being discarded
+  top_count=number_of_dicts-(round(number_of_dicts/dictionaries_range_for_discard))
+
+  macro_df_with_filter=macro_df[macro_df.Count < top_count]
+  macro_dict_with_words_out_of_bounds=macro_df[macro_df.Count >= top_count]
+
+  macro_df_with_filter.to_csv('{}{}{}'.format(macro_dictionaries_path,'macro-dictionary',file_type),sep=SEPARATOR,encoding=ENCODING,index=False)
+  macro_dict_with_words_out_of_bounds.to_csv('{}{}{}'.format(macro_dictionaries_path,'macro-dictionary-out-of-bounds',file_type),sep=SEPARATOR,encoding=ENCODING,index=False)
+  #Cleaning data with words out of bounds
+  return macro_dict_with_words_out_of_bounds['Word'].array

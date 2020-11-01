@@ -7,7 +7,7 @@ import operator
 from pathlib import Path
 from termcolor import colored
 from spacy.lang.es.examples import sentences
-from main_utils import text_cleaner, web_crawler, words_classification
+from main_utils import df_words_clustering_by_percent, macro_dictionaries_filter, text_cleaner, web_crawler, words_classification
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
@@ -22,14 +22,16 @@ SEPARATOR=config['DEFAULT']['separator']
 dictionaries_path=config['DEFAULT']['dictionaries_path']
 articles_path = config['DEFAULT']['articles_path']
 macro_dictionaries_path = config['DEFAULT']['macro_dictionaries_path']
-max_len=int(config['DEFAULT']['max_len'])
-min_len=int(config['DEFAULT']['min_len'])
+file_type=config['DEFAULT']['file_type']
 arr_points_values=config['DEFAULT']['arr_points'].split(',')
-arr_points_percent=config['DEFAULT']['arr_points_percent'].split(',')
+
 arr_points_values=list(map(lambda x: int(x), arr_points_values))
-arr_points_percent=list(map(lambda x: int(x), arr_points_percent))
 
 final_result_dict={}
+macroDictionary_dict={}
+words_dict_candidate={}
+macroDictionary=[]
+number_of_dicts=0
 
 #Launch crawler
 web_crawler()
@@ -37,8 +39,8 @@ web_crawler()
 for r, d, f in os.walk(articles_path):
     for file in f:
         words_dict={}
-        file_type=file.split('_')[0]
-        dictionary_file=file_type+'.csv'
+        category_type=file.split('_')[0]
+        dictionary_file='{}{}'.format(category_type,file_type)
         articleFile = open('{}{}{}'.format(r,'/',file),'r',encoding=ENCODING)
         article=articleFile.read()
 
@@ -74,9 +76,6 @@ for r, d, f in os.walk(dictionaries_path):
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #Filter common words between dictionaries
-macroDictionary=[]
-macroDictionary_dict={}
-number_of_dicts=0
 
 for r, d, f in os.walk(dictionaries_path):
     number_of_dicts=len(f)
@@ -93,19 +92,7 @@ for r, d, f in os.walk(dictionaries_path):
         Macro_df['Word']=macroDictionary_dict.keys()
         Macro_df['Count']=macroDictionary_dict.values()
 
-#How many times a word can appear in the dictionaries before being discarded
-top_count=number_of_dicts-(round(number_of_dicts/1.6))
-
-Macro_df_with_filter=Macro_df[Macro_df.Count < top_count]
-MacroDict_with_words_out_of_bounds=Macro_df[Macro_df.Count >= top_count]
-
-print('Discarded words:')
-print(MacroDict_with_words_out_of_bounds)
-Macro_df_with_filter.to_csv('{}{}'.format(macro_dictionaries_path,'macro-dictionary.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
-MacroDict_with_words_out_of_bounds.to_csv('{}{}'.format(macro_dictionaries_path,'macro-dictionary-out-of-bounds.csv'),sep=SEPARATOR,encoding=ENCODING,index=False)
-
-#Cleaning data with words out of bounds
-out_of_bounds=MacroDict_with_words_out_of_bounds['Word'].array
+out_of_bounds=macro_dictionaries_filter(number_of_dicts,Macro_df)
 
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
@@ -125,14 +112,7 @@ for r, d, f in os.walk(dictionaries_path):
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
         df['Points']=0
         arr_points=[]
-        df_len=len(df)
-        df_top_10_percent=round((df_len/100)*arr_points_percent[0])
-        df_top_20_percent=round((df_len/100)*arr_points_percent[1])
-        df_top_30_percent=round((df_len/100)*arr_points_percent[2])
-        first_range=range(0,df_top_10_percent)
-        second_range=range(df_top_10_percent, df_top_20_percent)
-        third_range=range(df_top_20_percent, df_top_30_percent)
-        last_range=range(df_top_30_percent,df_len)
+        first_range,second_range,third_range,last_range=df_words_clustering_by_percent(df)
 
         for index, row in df.iterrows():
             if index in first_range:
@@ -160,8 +140,6 @@ candidate_text=text_cleaner(r.text)
 
 doc_candidate=nlp(candidate_text)
 
-words_dict_candidate={}
-
 words_classification(doc_candidate,words_dict_candidate)
 
 df_from_candidate = pd.DataFrame()
@@ -180,6 +158,6 @@ for r, d, f in os.walk(dictionaries_path):
             if row['Word'] in df_words_keys:
                 points=points+df_words[row['Word']]
                 count=count+1
-        final_result_dict[file.split('.csv')[0].title()]=points
+        final_result_dict[file.split(file_type)[0].title()]=points
     final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
     print((colored(final_result_dict, 'green')))

@@ -128,3 +128,6 @@ def dictionaries_cleaner_by_quantile(dictionaries_path):
       df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
       df=df[df.Total > df['Total'].quantile(quantile)]
       df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
+
+def articles_len_filter(article):
+  return article if(len(article)<1000000) else article[:1000000]

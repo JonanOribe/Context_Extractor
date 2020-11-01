@@ -7,7 +7,7 @@ import operator
 from pathlib import Path
 from termcolor import colored
 from spacy.lang.es.examples import sentences
-from main_utils import df_words_clustering_by_percent, dictionaries_cleaner_by_quantile, macro_dictionaries_filter, text_cleaner, web_crawler, words_classification
+from main_utils import articles_len_filter, df_words_clustering_by_percent, dictionaries_cleaner_by_quantile, macro_dictionaries_filter, text_cleaner, web_crawler, words_classification
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
@@ -44,7 +44,7 @@ for r, d, f in os.walk(articles_path):
         articleFile = open('{}{}{}'.format(r,'/',file),'r',encoding=ENCODING)
         article=articleFile.read()
 
-        doc=nlp(article)
+        doc=nlp(articles_len_filter(article))
 
         words_dict=words_classification(doc,words_dict)
 

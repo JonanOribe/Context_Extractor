@@ -1,9 +1,9 @@
 import os, shutil
 import requests
-from bs4 import BeautifulSoup
 import pandas as pd
 import re
 import configparser
+from bs4 import BeautifulSoup
 from termcolor import colored
 from functools import wraps
 from time import time

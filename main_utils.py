@@ -45,19 +45,21 @@ def text_cleaner(web_content):
   regex = re.compile('[^a-zA-Z]')
   return regex.sub(' ', web_content)
 
-@timing
-def web_crawler():
-  map(lambda x: folder_cleaner(x), arr_paths)
-  companies=web_searcher()
-  print(colored('This will took a while...','yellow'))
-  s = requests.session()
-  for company in companies:
+def website_info_getter_and_cleaner(session,company):
     web=company.website
-    r = s.get(web)
+    r = session.get(web)
     soup = BeautifulSoup(r.text, 'html.parser')
     web_content=soup.find('body').text
     web_conten_after_cleaner=text_cleaner(web_content)
     articles_to_txt(company,web_conten_after_cleaner)
+
+@timing
+def web_crawler():
+  session = requests.session()
+  map(lambda x: folder_cleaner(x), arr_paths)
+  print(colored('This will took a while...','yellow'))
+  for company in web_searcher():
+    website_info_getter_and_cleaner(session,company)
 
 @timing
 def web_searcher():

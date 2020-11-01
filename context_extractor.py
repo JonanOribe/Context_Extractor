@@ -94,8 +94,7 @@ for r, d, f in os.walk(dictionaries_path):
         df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
 
         for index, row in df.iterrows():
-            if row['Word'] in out_of_bounds:
-                df.drop([index], inplace=True)
+            if row['Word'] in out_of_bounds: df.drop([index], inplace=True)
 
         df.sort_values(by=['Total'], ascending=False,inplace=True)
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
@@ -110,14 +109,11 @@ for r, d, f in os.walk(dictionaries_path):
         first_range,second_range,third_range,last_range=df_words_clustering_by_percent(df)
 
         for index, row in df.iterrows():
-            if index in first_range:
-                arr_points.append(arr_points_values[0])
-            if index in second_range:
-                arr_points.append(arr_points_values[1])
-            if index in third_range:
-                arr_points.append(arr_points_values[2])
-            if index in last_range:
-                arr_points.append(arr_points_values[3])
+            if index in first_range: arr_points.append(arr_points_values[0])
+            if index in second_range: arr_points.append(arr_points_values[1])
+            if index in third_range: arr_points.append(arr_points_values[2])
+            if index in last_range: arr_points.append(arr_points_values[3])
+
         df['Points']=arr_points
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 

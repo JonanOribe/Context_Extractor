@@ -20,6 +20,7 @@ macro_dictionaries_path=config['DEFAULT']['macro_dictionaries_path']
 SEPARATOR=config['DEFAULT']['separator']
 max_len=int(config['DEFAULT']['max_len'])
 min_len=int(config['DEFAULT']['min_len'])
+max_character_per_article_spacy=int(config['DEFAULT']['max_character_per_article_spacy'])
 file_type=config['DEFAULT']['file_type']
 dictionaries_range_for_discard=float(config['DEFAULT']['dictionaries_range_for_discard'])
 quantile=float(config['DEFAULT']['quantile'])
@@ -49,8 +50,7 @@ def website_info_getter_and_cleaner(session,company):
     web=company.website
     r = session.get(web)
     soup = BeautifulSoup(r.text, 'html.parser')
-    web_content=soup.find('body').text
-    web_conten_after_cleaner=text_cleaner(web_content)
+    web_conten_after_cleaner=text_cleaner(soup.find('body').text)
     articles_to_txt(company,web_conten_after_cleaner)
 
 @timing
@@ -58,16 +58,13 @@ def web_crawler():
   session = requests.session()
   map(lambda x: folder_cleaner(x), arr_paths)
   print(colored('This will took a while...','yellow'))
-  for company in web_searcher():
-    website_info_getter_and_cleaner(session,company)
+  [website_info_getter_and_cleaner(session,company) for company in web_searcher()]
 
 @timing
 def web_searcher():
   companies=[]
   df=pd.read_csv('{}'.format(webs_to_scrapp), sep=SEPARATOR,encoding=ENCODING)
-  for index, row in df.iterrows():
-    company=Company(row['Name'],row['Web'],row['Type'])
-    companies.append(company)
+  [companies.append(Company(row['Name'],row['Web'],row['Type'])) for index, row in df.iterrows()]
   return companies
 
 def articles_to_txt(company,content):
@@ -131,4 +128,4 @@ def dictionaries_cleaner_by_quantile(dictionaries_path):
       df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
 def articles_len_filter(article):
-  return article if(len(article)<1000000) else article[:1000000]
+  return article if(len(article)<max_character_per_article_spacy) else article[:max_character_per_article_spacy]

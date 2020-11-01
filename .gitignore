@@ -1,3 +1,6 @@
+__pycache__
+.pytest_cache
+*.pyc
 dictionaries/*.csv
 macro-dictionaries/*.csv
 *.txt

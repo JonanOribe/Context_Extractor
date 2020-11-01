@@ -7,7 +7,7 @@ import operator
 from pathlib import Path
 from termcolor import colored
 from spacy.lang.es.examples import sentences
-from main_utils import web_crawler
+from main_utils import text_cleaner, web_crawler, words_classification
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
@@ -25,7 +25,9 @@ macro_dictionaries_path = config['DEFAULT']['macro_dictionaries_path']
 max_len=int(config['DEFAULT']['max_len'])
 min_len=int(config['DEFAULT']['min_len'])
 arr_points_values=config['DEFAULT']['arr_points'].split(',')
+arr_points_percent=config['DEFAULT']['arr_points_percent'].split(',')
 arr_points_values=list(map(lambda x: int(x), arr_points_values))
+arr_points_percent=list(map(lambda x: int(x), arr_points_percent))
 
 final_result_dict={}
 
@@ -42,14 +44,8 @@ for r, d, f in os.walk(articles_path):
 
         doc=nlp(article)
 
-        for token in doc:
-            if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.text.isnumeric()==False):
-                word=token.text.lower()
-                dict_keys=words_dict.keys()
-                if word in dict_keys:
-                    words_dict[word]=words_dict[word]+1
-                else:
-                    words_dict[word]=1
+        words_dict=words_classification(doc,words_dict)
+
         df_temp = pd.DataFrame()
         df_temp['Word']=words_dict.keys()
         df_temp['Count']=words_dict.values()
@@ -130,9 +126,9 @@ for r, d, f in os.walk(dictionaries_path):
         df['Points']=0
         arr_points=[]
         df_len=len(df)
-        df_top_10_percent=round((df_len/100)*10)
-        df_top_20_percent=round((df_len/100)*20)
-        df_top_30_percent=round((df_len/100)*30)
+        df_top_10_percent=round((df_len/100)*arr_points_percent[0])
+        df_top_20_percent=round((df_len/100)*arr_points_percent[1])
+        df_top_30_percent=round((df_len/100)*arr_points_percent[2])
         first_range=range(0,df_top_10_percent)
         second_range=range(df_top_10_percent, df_top_20_percent)
         third_range=range(df_top_20_percent, df_top_30_percent)
@@ -160,21 +156,14 @@ for r, d, f in os.walk(dictionaries_path):
 r = requests.get('https://www.ford.es/')
 #r = requests.get('https://www.mi.com/es')
 
-candidate_text=r.text
+candidate_text=text_cleaner(r.text)
 
 doc_candidate=nlp(candidate_text)
 
 words_dict_candidate={}
 
-for token in doc_candidate:
-    if('/' not in token.text and '<' not in token.text and '=' not in token.text):
-        if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.text.isnumeric()==False):
-            word=token.text.lower()
-            dict_keys=words_dict_candidate.keys()
-            if word in dict_keys:
-                words_dict_candidate[word]=words_dict_candidate[word]+1
-            else:
-                words_dict_candidate[word]=1
+words_classification(doc_candidate,words_dict_candidate)
+
 df_from_candidate = pd.DataFrame()
 df_from_candidate['Word']=words_dict_candidate.keys()
 df_from_candidate['Count']=words_dict_candidate.values()

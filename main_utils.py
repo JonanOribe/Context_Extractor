@@ -34,6 +34,8 @@ arr_points_percent=list(map(lambda x: int(x), arr_points_percent))
 
 arr_paths=[articles_path,dictionaries_path,macro_dictionaries_path]
 web_type_and_url_dict={}
+not_async_web_dict=[]
+
 
 def timing(f):
     @wraps(f)
@@ -63,12 +65,12 @@ async def fetch(company, session):
           return resp
     except Exception as e:
       print( colored("<p>Error: %s</p>" % str(e),'red'))
+      not_async_web_dict.append(company)
 
 async def fetch_all(companies):
     """Launch requests for all web pages."""
     tasks = []
     fetch.start_time = dict() # dictionary of start times for each url
-    #urls=[company.website for company in companies]
     async with ClientSession() as session:
         for company in companies:
             task = asyncio.ensure_future(fetch(company, session))
@@ -86,12 +88,11 @@ def website_info_getter_and_cleaner(company,text):
     web_conten_after_cleaner=text_cleaner(soup.find('body').text)
     articles_to_txt(company,web_conten_after_cleaner)
 
-def demo_async(session,companies):
+def crawler_async(session,companies):
     """Fetch list of web pages asynchronously."""
     start_time = default_timer()
 
     loop = asyncio.get_event_loop() # event loop
-    #urls=[company.website for company in companies]
     future = asyncio.ensure_future(fetch_all(companies)) # tasks to do
     loop.run_until_complete(future) # loop until done
 
@@ -104,10 +105,8 @@ def web_crawler():
   session = requests.session()
   map(lambda x: folder_cleaner(x), arr_paths)
   print(colored('This will took a while...','yellow'))
-  #urls=[company.website for company in web_searcher()]
   companies=web_searcher()
-  demo_async(session,companies)
-  #[website_info_getter_and_cleaner(session,company) for company in web_searcher()]
+  crawler_async(session,companies)
 
 @timing
 def web_searcher():

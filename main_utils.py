@@ -188,16 +188,12 @@ def articles_len_filter(article):
 def predict_new_website_context(nlp):
   session = requests.session()
   arr_to_predict=[
-    'https://www.nissan.es/experiencia-nissan.html'
-    ,'http://www.x-plane.es/'
-    ,'https://www.google.com/intl/es_ALL/drive/using-drive/'
-    ,'https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/'
-    ,'https://www.milanuncios.com/barcos-a-motor-en-vizcaya/'
-    ,'https://www.cosasdebarcos.com/barcos-ocasion/en-vizcaya-49/'
-    ,'https://www.google.com/intl/es_ALL/drive/using-drive/'
-    ,'https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/'
-    ,'https://www.ford.es/'
-    ,'https://www.mi.com/es']
+    'https://hbase.apache.org/'
+    ,'https://aws.amazon.com/'
+    ,'https://en.wikipedia.org/wiki/Tupolev'
+    ,'https://www.tesla.com/modelx'
+    ,'https://www.tesla.com/modely'
+    ]
   for url in arr_to_predict:
     final_result_dict={}
     words_dict_candidate={}

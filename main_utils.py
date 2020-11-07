@@ -184,40 +184,43 @@ def articles_len_filter(article):
   return article if(len(article)<max_character_per_article_spacy) else article[:max_character_per_article_spacy]
 
 @timing
-@profile
+#@profile
 def predict_new_website_context(nlp):
-  final_result_dict={}
-  words_dict_candidate={}
   session = requests.session()
-  #Crawling the candidate URL
-  #r = requests.get('https://www.nissan.es/experiencia-nissan.html')
-  #r = requests.get('http://www.x-plane.es/')
-  #r = requests.get('https://www.milanuncios.com/barcos-a-motor-en-vizcaya/')
-  #r = requests.get('https://www.cosasdebarcos.com/barcos-ocasion/en-vizcaya-49/')
-  #r = requests.get('https://www.google.com/intl/es_ALL/drive/using-drive/')
-  #r = requests.get('https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/')
-  r = session.get('https://www.ford.es/')
-  #r = requests.get('https://www.mi.com/es')
+  arr_to_predict=[
+    'https://www.nissan.es/experiencia-nissan.html'
+    ,'http://www.x-plane.es/'
+    ,'https://www.google.com/intl/es_ALL/drive/using-drive/'
+    ,'https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/'
+    ,'https://www.milanuncios.com/barcos-a-motor-en-vizcaya/'
+    ,'https://www.cosasdebarcos.com/barcos-ocasion/en-vizcaya-49/'
+    ,'https://www.google.com/intl/es_ALL/drive/using-drive/'
+    ,'https://www.cosasdebarcos.com/empresas-nauticas-tienda-nautica-6/en-vizcaya-49/'
+    ,'https://www.ford.es/'
+    ,'https://www.mi.com/es']
+  for url in arr_to_predict:
+    final_result_dict={}
+    words_dict_candidate={}
+    r = session.get(url)
+    candidate_text=text_cleaner(r.text)
+    words_classification(nlp(candidate_text),words_dict_candidate)
 
-  candidate_text=text_cleaner(r.text)
-  words_classification(nlp(candidate_text),words_dict_candidate)
+    df_from_candidate = pd.DataFrame()
+    df_from_candidate['Word']=words_dict_candidate.keys()
+    df_from_candidate['Count']=words_dict_candidate.values()
 
-  df_from_candidate = pd.DataFrame()
-  df_from_candidate['Word']=words_dict_candidate.keys()
-  df_from_candidate['Count']=words_dict_candidate.values()
-
-  for r, d, f in os.walk(dictionaries_path):
-      for file in f:
-          count=points=0
-          df_words={}
-          df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
-          for index, row in df.iterrows():
-              df_words[row['Word']]=row['Points']
-          df_words_keys=df_words.keys()
-          for index, row in df_from_candidate.iterrows():
-              if row['Word'] in df_words_keys:
-                  points=points+df_words[row['Word']]
-                  count=count+1
-          final_result_dict[file.split(file_type)[0].title()]=points
-      final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
-      print(colored(final_result_dict, 'green'))
+    for r, d, f in os.walk(dictionaries_path):
+        for file in f:
+            count=points=0
+            df_words={}
+            df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
+            for index, row in df.iterrows():
+                df_words[row['Word']]=row['Points']
+            df_words_keys=df_words.keys()
+            for index, row in df_from_candidate.iterrows():
+                if row['Word'] in df_words_keys:
+                    points=points+df_words[row['Word']]
+                    count=count+1
+            final_result_dict[file.split(file_type)[0].title()]=points
+        final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
+        print('{}{}'.format(colored(url,'yellow'),colored(final_result_dict, 'green')))

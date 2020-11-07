@@ -50,22 +50,28 @@ def asterisks(num):
     """Returns a string of asterisks reflecting the magnitude of a number."""
     return int(num*10)*'*'
 
-async def fetch(url, session):
+async def fetch(company, session):
     """Fetch a url, using specified ClientSession."""
+    url=company.website
     fetch.start_time[url] = default_timer()
-    async with session.get(url) as response:
-        resp = await response.read()
-        elapsed = default_timer() - fetch.start_time[url]
-        print('{0:30}{1:5.2f} {2}'.format(url, elapsed, asterisks(elapsed)))
-        return resp
+    try:
+      async with session.get(url) as response:
+          resp = await response.read()
+          website_info_getter_and_cleaner(company,resp)
+          elapsed = default_timer() - fetch.start_time[url]
+          print('{0:30}{1:5.2f} {2}'.format(url, elapsed, asterisks(elapsed)))
+          return resp
+    except Exception as e:
+      print( colored("<p>Error: %s</p>" % str(e),'red'))
 
-async def fetch_all(urls):
+async def fetch_all(companies):
     """Launch requests for all web pages."""
     tasks = []
     fetch.start_time = dict() # dictionary of start times for each url
+    #urls=[company.website for company in companies]
     async with ClientSession() as session:
-        for url in urls:
-            task = asyncio.ensure_future(fetch(url, session))
+        for company in companies:
+            task = asyncio.ensure_future(fetch(company, session))
             tasks.append(task) # create list of tasks
         _ = await asyncio.gather(*tasks) # gather task responses
 
@@ -74,18 +80,19 @@ def text_cleaner(web_content):
   regex = re.compile('[^a-zA-Z]')
   return regex.sub(' ', web_content)
 
-def website_info_getter_and_cleaner(session,company):
-    r = session.get(company.website)
-    soup = BeautifulSoup(r.text, 'html.parser')
+def website_info_getter_and_cleaner(company,text):
+    #r = session.get(company.website)
+    soup = BeautifulSoup(text, 'html.parser')
     web_conten_after_cleaner=text_cleaner(soup.find('body').text)
     articles_to_txt(company,web_conten_after_cleaner)
 
-def demo_async(urls):
+def demo_async(session,companies):
     """Fetch list of web pages asynchronously."""
     start_time = default_timer()
 
     loop = asyncio.get_event_loop() # event loop
-    future = asyncio.ensure_future(fetch_all(urls)) # tasks to do
+    #urls=[company.website for company in companies]
+    future = asyncio.ensure_future(fetch_all(companies)) # tasks to do
     loop.run_until_complete(future) # loop until done
 
     tot_elapsed = default_timer() - start_time
@@ -97,7 +104,10 @@ def web_crawler():
   session = requests.session()
   map(lambda x: folder_cleaner(x), arr_paths)
   print(colored('This will took a while...','yellow'))
-  [website_info_getter_and_cleaner(session,company) for company in web_searcher()]
+  #urls=[company.website for company in web_searcher()]
+  companies=web_searcher()
+  demo_async(session,companies)
+  #[website_info_getter_and_cleaner(session,company) for company in web_searcher()]
 
 @timing
 def web_searcher():

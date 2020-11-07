@@ -59,7 +59,7 @@ async def fetch(company, session):
     try:
       async with session.get(url) as response:
           resp = await response.read()
-          website_info_getter_and_cleaner(company,resp)
+          website_info_getter_and_cleaner(session,company,resp)
           elapsed = default_timer() - fetch.start_time[url]
           print('{0:30}{1:5.2f} {2}'.format(url, elapsed, asterisks(elapsed)))
           return resp
@@ -82,8 +82,9 @@ def text_cleaner(web_content):
   regex = re.compile('[^a-zA-Z]')
   return regex.sub(' ', web_content)
 
-def website_info_getter_and_cleaner(company,text):
-    #r = session.get(company.website)
+def website_info_getter_and_cleaner(session,company,text):
+    if(text=='empty'):
+      text = session.get(company.website).text
     soup = BeautifulSoup(text, 'html.parser')
     web_conten_after_cleaner=text_cleaner(soup.find('body').text)
     articles_to_txt(company,web_conten_after_cleaner)
@@ -99,6 +100,9 @@ def crawler_async(session,companies):
     tot_elapsed = default_timer() - start_time
     print(colored(' WITH ASYNCIO: '.rjust(30, '-') + '{0:5.2f} {1}'. \
         format(tot_elapsed, asterisks(tot_elapsed)),'green'))
+    if(len(not_async_web_dict)>0):
+      resp='empty'
+      [website_info_getter_and_cleaner(session,company,resp) for company in not_async_web_dict]
 
 @timing
 def web_crawler():

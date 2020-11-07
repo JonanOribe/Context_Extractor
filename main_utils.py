@@ -9,6 +9,9 @@ from bs4 import BeautifulSoup
 from termcolor import colored
 from functools import wraps
 from time import time
+import asyncio
+from timeit import default_timer
+from aiohttp import ClientSession
 from main_classes import Company
 
 ENCODING='utf8'
@@ -43,6 +46,29 @@ def timing(f):
         return result
     return wrap
 
+def asterisks(num):
+    """Returns a string of asterisks reflecting the magnitude of a number."""
+    return int(num*10)*'*'
+
+async def fetch(url, session):
+    """Fetch a url, using specified ClientSession."""
+    fetch.start_time[url] = default_timer()
+    async with session.get(url) as response:
+        resp = await response.read()
+        elapsed = default_timer() - fetch.start_time[url]
+        print('{0:30}{1:5.2f} {2}'.format(url, elapsed, asterisks(elapsed)))
+        return resp
+
+async def fetch_all(urls):
+    """Launch requests for all web pages."""
+    tasks = []
+    fetch.start_time = dict() # dictionary of start times for each url
+    async with ClientSession() as session:
+        for url in urls:
+            task = asyncio.ensure_future(fetch(url, session))
+            tasks.append(task) # create list of tasks
+        _ = await asyncio.gather(*tasks) # gather task responses
+
 def text_cleaner(web_content):
   #regex = re.compile(r"(<\/\w*>|<\w*>|<\w*|\".*\"|\w*=|'.*')|([^a-zA-Z])")
   regex = re.compile('[^a-zA-Z]')
@@ -53,6 +79,18 @@ def website_info_getter_and_cleaner(session,company):
     soup = BeautifulSoup(r.text, 'html.parser')
     web_conten_after_cleaner=text_cleaner(soup.find('body').text)
     articles_to_txt(company,web_conten_after_cleaner)
+
+def demo_async(urls):
+    """Fetch list of web pages asynchronously."""
+    start_time = default_timer()
+
+    loop = asyncio.get_event_loop() # event loop
+    future = asyncio.ensure_future(fetch_all(urls)) # tasks to do
+    loop.run_until_complete(future) # loop until done
+
+    tot_elapsed = default_timer() - start_time
+    print(colored(' WITH ASYNCIO: '.rjust(30, '-') + '{0:5.2f} {1}'. \
+        format(tot_elapsed, asterisks(tot_elapsed)),'green'))
 
 @timing
 def web_crawler():

@@ -107,7 +107,8 @@ def crawler_async(session,companies):
 @timing
 def web_crawler():
   session = requests.session()
-  map(lambda x: folder_cleaner(x), arr_paths)
+  [folder_cleaner(x) for x in arr_paths]
+  #map(lambda x: folder_cleaner(x), arr_paths)
   print(colored('This will took a while...','yellow'))
   companies=web_searcher()
   crawler_async(session,companies)
@@ -193,6 +194,8 @@ def predict_new_website_context(nlp):
     ,'https://en.wikipedia.org/wiki/Tupolev'
     ,'https://www.tesla.com/modelx'
     ,'https://www.tesla.com/modely'
+    ,'https://explained.ai/'
+    ,'https://bl.ocks.org/mbostock'
     ]
   for url in arr_to_predict:
     final_result_dict={}

@@ -34,3 +34,18 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    #- name: Docker Action
+      # You may pin to the exact commit or the version.
+      # uses: zenato/docker-action@8309ea4d790d074676660449b9f2bcbcae25cdb9
+      #uses: zenato/docker-action@v1.0.0
+      #with:
+        # Registry username
+        #username: 
+        # Registry password
+        #password: 
+        # Repository on registry
+        #repository: 
+        # Registry hostname
+        #registry: # optional
+        # Image tag
+        #tag: # optional

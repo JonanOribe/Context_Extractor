@@ -15,6 +15,7 @@ from aiohttp import ClientSession
 from main_classes import Company
 
 ENCODING='utf8'
+diccionaries_len_arr=[]
 
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
@@ -54,6 +55,7 @@ def asterisks(num):
 
 async def fetch(company, session):
     """Fetch a url, using specified ClientSession."""
+    print(company.description())
     url=company.website
     fetch.start_time[url] = default_timer()
     try:

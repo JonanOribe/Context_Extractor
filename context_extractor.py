@@ -92,7 +92,7 @@ for r, d, f in os.walk(dictionaries_path):
         for index, row in df.iterrows():
             if row['Word'] in out_of_bounds: df.drop([index], inplace=True)
 
-        df.sort_values(by=['Total'], ascending=False,inplace=True)
+        df.sort_values(by=['Total'], ascending=False,inplace=True)#TODO ajustar al diccionario más pequeño
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
 #SORTING THE DATA BY COUNTS AND Adding weigths

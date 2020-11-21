@@ -5,9 +5,9 @@ This project works around the idea of ​​being able to detect the context of 
 
 # Installation of Python´s libraries
 
-pip install -r requirements.txt
-python -m spacy download en_core_web_sm
+<li>pip install -r requirements.txt</li>
+<li>python -m spacy download en_core_web_sm</li>
 
 # Launch testing with
 
-pytest -v
+<li>pytest -v</li>

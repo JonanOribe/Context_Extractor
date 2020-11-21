@@ -1,8 +1,13 @@
-# Container image that runs your code
-FROM alpine:3.10
+FROM python:3
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
-COPY entrypoint.sh /entrypoint.sh
+RUN pip install --upgrade pip
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+WORKDIR ./
+
+COPY requirements.txt .
+
+ADD context_extractor.py /
+
+RUN pip install -r requirements.txt
+
+CMD [ "python", "./context_extractor.py" ]

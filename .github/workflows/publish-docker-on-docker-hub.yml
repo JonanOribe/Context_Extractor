@@ -16,3 +16,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: jonan87/context-parser:tagname
           tag_with_ref: true
+          run: docker push jonan87/context-parser:tagname
+ 

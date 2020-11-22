@@ -10,4 +10,4 @@ This project works around the idea of ​​being able to detect the context of 
 
 # Launch testing with
 
-<li>pytest -v</li>
+:mag_right: pytest -v

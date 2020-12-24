@@ -141,8 +141,8 @@ def folder_cleaner(articles_path):
 @timing
 def words_classification(doc,words_dict):
   for token in doc:
-    if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.text.isnumeric()==False):
-            word=token.text.lower()
+    if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.lemma_.isnumeric()==False):
+            word=token.lemma_.lower()
             if word in words_dict.keys():
                 words_dict[word]=words_dict[word]+1
             else:

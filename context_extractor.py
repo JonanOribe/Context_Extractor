@@ -7,12 +7,13 @@ import operator
 from pathlib import Path
 from termcolor import colored
 from spacy.lang.es.examples import sentences
-from main_utils import articles_len_filter, df_words_clustering_by_percent, dictionaries_cleaner_by_quantile, macro_dictionaries_filter, predict_new_website_context, text_cleaner, web_crawler, words_classification
+from main_utils import articles_len_filter, df_words_clustering_by_percent, dictionaries_cleaner_by_quantile, macro_dictionaries_filter, predict_new_website_context, reduce_dictionaries_to_smallest_one, text_cleaner, web_crawler, words_classification
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 
 ENCODING='utf8'
+dictionaries_len_dict={}
 
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
@@ -28,7 +29,6 @@ arr_points_values=config['DEFAULT']['arr_points'].split(',')
 arr_points_values=list(map(lambda x: int(x), arr_points_values))
 
 macroDictionary_dict={}
-macroDictionary=[]
 
 #Launch crawler
 web_crawler()
@@ -94,8 +94,11 @@ for r, d, f in os.walk(dictionaries_path):
         for index, row in df.iterrows():
             if row['Word'] in out_of_bounds: df.drop([index], inplace=True)
 
-        df.sort_values(by=['Total'], ascending=False,inplace=True)#TODO ajustar al diccionario más pequeño
+        df.sort_values(by=['Total'], ascending=False,inplace=True)
+        dictionaries_len_dict[file]=len(df)
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
+
+reduce_dictionaries_to_smallest_one(dictionaries_len_dict)
 
 #SORTING THE DATA BY COUNTS AND Adding weigths
 

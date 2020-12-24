@@ -225,3 +225,11 @@ def predict_new_website_context(nlp):
             final_result_dict[file.split(file_type)[0].title()]=points
         final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
         print('{}{}'.format(colored(url,'yellow'),colored(final_result_dict, 'green')))
+
+def reduce_dictionaries_to_smallest_one(dictionaries_len_dict):
+  SMALLEST_DICTIONARY_LEN = dictionaries_len_dict[min(dictionaries_len_dict, key=dictionaries_len_dict.get)]
+  for r, d, f in os.walk(dictionaries_path):
+      for file in f:
+          df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
+          df=df[:SMALLEST_DICTIONARY_LEN]
+          df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)

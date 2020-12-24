@@ -1,4 +1,4 @@
-# Inferator [![Build Status](https://travis-ci.com/JonanOribe/Inferator.svg?branch=master)](https://travis-ci.com/JonanOribe/Inferator)
+# Inferator ![Python application](https://github.com/JonanOribe/Inferator/workflows/Python%20application/badge.svg) ![Docker](https://github.com/JonanOribe/Inferator/workflows/Docker/badge.svg)
 
 
 This project works around the idea of ​​being able to detect the context of a website by analyzing its content automatically and the auto-training of the model.
@@ -10,4 +10,4 @@ This project works around the idea of ​​being able to detect the context of 
 
 # Launch testing with
 
-<li>pytest -v</li>
+:mag_right: pytest -v

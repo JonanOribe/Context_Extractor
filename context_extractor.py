@@ -59,6 +59,8 @@ for r, d, f in os.walk(dictionaries_path):
     for file in f:
         df_temp=pd.read_csv('{}{}'.format(dictionaries_path,file),sep=SEPARATOR)
         df_temp['Total']=df_temp.groupby(['Word'])['Count'].transform('sum')
+        df_temp['Total'] = df_temp['Total'].fillna(0)
+        df_temp['Total'] = df_temp['Total'].astype(int)
         del df_temp['Count']
         df_temp=df_temp.drop_duplicates(keep = 'first')
         df_temp=df_temp.sort_values(by='Total',ascending=False)

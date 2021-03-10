@@ -200,8 +200,10 @@ def predict_new_website_context(nlp,micro_dictionaries,macro_df_with_filter):
     'https://hbase.apache.org/'
     ,'https://aws.amazon.com/'
     ,'https://en.wikipedia.org/wiki/Tupolev'
+    ,'https://en.wikipedia.org/wiki/Tesla,_Inc.'
     ,'https://www.tesla.com/modelx'
     ,'https://www.tesla.com/modely'
+    ,'https://en.wikipedia.org/wiki/SolarCity'
     ,'https://explained.ai/'
     ,'https://bl.ocks.org/mbostock'
     ]

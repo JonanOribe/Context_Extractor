@@ -67,6 +67,8 @@ autonomy;1
 availability;1
 aviation;1
 award;2
+baby;1
+babygrow;1
 background;1
 badge;1
 bag;1
@@ -83,6 +85,7 @@ basin;1
 basis;1
 battery;2
 battle;1
+battlespace;1
 bean;1
 beef;1
 beginning;1
@@ -123,7 +126,7 @@ cap;1
 capacitystorage;1
 car;2
 card;2
-care;1
+care;2
 career;2
 cargo;1
 carrier;1
@@ -133,6 +136,7 @@ cash;1
 category;2
 cattle;1
 cause;1
+cefa;1
 celebrate;1
 cell;1
 cent;1
@@ -159,7 +163,6 @@ chemical;1
 chemist;1
 chew;1
 chicken;1
-child;2
 chocolate;1
 choice;1
 citation;1
@@ -184,7 +187,6 @@ combustion;1
 comfort;2
 command;1
 commentary;1
-commitment;2
 commodity;1
 comms;1
 commute;1
@@ -219,6 +221,7 @@ copyright;2
 corn;1
 corridor;1
 corruption;1
+cos;1
 cost;2
 cotton;2
 course;2
@@ -347,7 +350,6 @@ evidence;1
 evolution;2
 example;1
 excavator;1
-excellence;1
 exchange;2
 exclusion;1
 exemption;1
@@ -402,6 +404,7 @@ forestry;1
 form;2
 framework;1
 fren;1
+frequency;1
 friend;1
 frigate;1
 front;2
@@ -425,6 +428,7 @@ gene;1
 genetic;1
 genome;1
 ger;1
+gift;1
 girl;1
 glance;1
 glossary;2
@@ -543,6 +547,7 @@ java;1
 jboss;1
 jean;1
 jet;2
+jewellery;1
 job;1
 journey;2
 jpeg;1
@@ -550,7 +555,7 @@ juice;1
 jump;1
 jurisdiction;1
 kick;1
-kid;1
+kid;2
 kilogram;1
 kilometre;2
 kind;1
@@ -571,7 +576,7 @@ launch;2
 launcher;1
 law;1
 lawn;1
-layer;1
+layer;2
 layout;1
 leadspace;1
 learning;1
@@ -624,6 +629,7 @@ map;2
 mark;1
 marketing;2
 marketplace;1
+massimodutti;1
 match;1
 math;1
 mbe;1
@@ -658,7 +664,6 @@ minute;2
 missile;1
 mission;2
 mobile;1
-mobility;2
 mode;1
 momentum;2
 money;1
@@ -676,6 +681,7 @@ mowing;1
 mpa;1
 mpg;1
 mpge;1
+mth;1
 multimedia;2
 muse;1
 museum;1
@@ -685,6 +691,7 @@ nameplate;1
 nation;2
 nature;1
 navy;1
+nbspitem;1
 neo;1
 nessa;1
 newsletter;1
@@ -700,6 +707,7 @@ ocean;1
 octane;1
 officer;2
 oilseed;1
+one;1
 onion;1
 online;1
 op;1
@@ -731,7 +739,6 @@ patent;1
 path;2
 pathfinder;1
 pathway;1
-patience;1
 pay;1
 payload;1
 pc;1
@@ -752,6 +759,8 @@ petrol;2
 phase;1
 phone;1
 pickup;1
+picture;1
+piece;1
 pig;1
 pilot;1
 pipeline;1
@@ -804,7 +813,6 @@ profit;1
 property;1
 proportion;1
 proposal;1
-propulsion;1
 prototype;1
 publication;2
 publish;1
@@ -859,7 +867,7 @@ responsibility;2
 rest;1
 restriction;1
 results;1
-return;1
+return;2
 review;2
 revolution;1
 rice;1
@@ -899,7 +907,7 @@ scientist;2
 scope;1
 scout;1
 sea;1
-season;1
+season;2
 seat;2
 section;1
 sedan;1
@@ -915,12 +923,14 @@ servlet;1
 servletinitialhandler;1
 set;1
 setup;2
+shape;1
 shareholder;2
 sharing;1
 sheep;1
 sheet;1
 shelf;1
 ship;1
+shipping;1
 shirt;1
 shopping;1
 showroom;1
@@ -943,6 +953,7 @@ society;2
 socket;1
 soil;1
 sorghum;1
+sort;1
 sovereignty;1
 spacecraft;1
 spacedatahighway;1
@@ -996,6 +1007,7 @@ swing;1
 takeover;1
 tank;1
 tanker;1
+tapered;1
 tariff;1
 task;2
 tax;1
@@ -1033,6 +1045,7 @@ tomato;1
 tomorrow;1
 tonne;1
 toolbox;1
+top;1
 torpedo;1
 torque;2
 total;1
@@ -1066,12 +1079,13 @@ trial;2
 trip;1
 triumph;1
 trouble;1
+trouser;1
 truck;1
 tuning;1
 turbine;1
 turf;1
 turkey;1
-turn;1
+turn;2
 turnaround;1
 tutorial;1
 tweet;1
@@ -1113,6 +1127,7 @@ vulnerability;1
 wage;1
 wall;1
 war;1
+wardrobe;1
 warfare;1
 warming;1
 warranty;2
@@ -1148,6 +1163,7 @@ xwb;1
 yard;1
 yeardesign;1
 yearthroughput;1
+yellow;1
 yield;1
 youtube;1
 zara;1

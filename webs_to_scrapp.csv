@@ -60,6 +60,11 @@ Cosstores_Men;clothes;https://www.cosstores.com/en_eur/men.html
 Massimo_Dutti;clothes;https://www.massimodutti.com/es/en/women/collection/leather/view-all-c1961030.html
 Massimo_Dutti_2;clothes;https://www.massimodutti.com/es/en/women/collection/soft-%26-activewear/accessories-c1972514.html
 Massimo_Dutti_3;clothes;https://www.massimodutti.com/es/en/women/collection/shirts-%26-blouses/view-all-c911173.html
+Dockers;clothes;https://www.dockers.com/US/en_US/sustainability/waterless/c/dockers_waterless_us/facets/productitemtype/pants
+Dockers_2;clothes;https://www.dockers.com/US/en_US/35th-anniversary-collection/c/dockers_clothing_35th_anniversary_collection
+Cortefiel;clothes;https://cortefiel.com/gb/en/women
+Cortefiel;clothes;https://cortefiel.com/gb/en/men
+Hats;clothes;https://www.hats.com/
 BP;energy;https://www.bp.com/en_gb/united-kingdom/home.html
 BP_fuels;energy;https://www.bp.com/en_gb/united-kingdom/home/products-and-services/bp-ultimate-fuels.html
 BP_biofuels;energy;https://www.bp.com/en_gb/united-kingdom/home/products-and-services/bp-ultimate-fuels/european-biofuels-labelling-faqs.html
@@ -70,3 +75,7 @@ Nuscale;energy;https://www.nuscalepower.com/
 Nuscale_tech;energy;https://www.nuscalepower.com/technology
 OpenLibrary;retail;https://openlibrary.org/
 OpenLibrary_2;retail;https://openlibrary.org/lists
+Walmart;retail;https://www.walmart.com/
+Target;retail;https://www.target.com/
+Lidl;retail;https://www.lidl.es/
+Aldi;retail;https://www.aldi.us/

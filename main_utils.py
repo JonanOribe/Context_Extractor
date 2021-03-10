@@ -240,6 +240,7 @@ def predict_new_website_context(nlp,micro_dictionaries,macro_df_with_filter):
 
 def reduce_dictionaries_to_smallest_one(dictionaries_len_dict):
   SMALLEST_DICTIONARY_LEN = dictionaries_len_dict[min(dictionaries_len_dict, key=dictionaries_len_dict.get)]
+  print('{}{}'.format(colored('SMALLEST_DICTIONARY: ','yellow'),colored(SMALLEST_DICTIONARY_LEN, 'green')))
   for r, d, f in os.walk(dictionaries_path):
       for file in f:
           df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)

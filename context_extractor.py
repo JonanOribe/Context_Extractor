@@ -85,7 +85,7 @@ for r, d, f in os.walk(dictionaries_path):
         Macro_df['Word']=macroDictionary_dict.keys()
         Macro_df['Count']=macroDictionary_dict.values()
 
-out_of_bounds=macro_dictionaries_filter(len(f),Macro_df)
+out_of_bounds,micro_dictionaries,macro_df_with_filter=macro_dictionaries_filter(len(f),Macro_df)
 
 for r, d, f in os.walk(dictionaries_path):
     for file in f:
@@ -118,4 +118,4 @@ for r, d, f in os.walk(dictionaries_path):
         df['Points']=arr_points
         df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
 
-predict_new_website_context(nlp)
+predict_new_website_context(nlp,micro_dictionaries,macro_df_with_filter)

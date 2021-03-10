@@ -85,11 +85,14 @@ def text_cleaner(web_content):
   return regex.sub(' ', web_content)
 
 def website_info_getter_and_cleaner(session,company,text):
+  try:
     if(text=='empty'):
       text = session.get(company.website).text
     soup = BeautifulSoup(text, 'html.parser')
     web_conten_after_cleaner=text_cleaner(soup.find('body').text)
     articles_to_txt(company,web_conten_after_cleaner)
+  except:
+    pass
 
 def crawler_async(session,companies):
     """Fetch list of web pages asynchronously."""
@@ -138,7 +141,7 @@ def folder_cleaner(articles_path):
       except Exception as e:
           print('Failed to delete %s. Reason: %s' % (file_path, e))
 
-@timing
+#@timing
 def words_classification(doc,words_dict):
   for token in doc:
     if(token.pos_=="NOUN" and max_len>len(token)>min_len and token.lemma_.isnumeric()==False):
@@ -169,12 +172,15 @@ def macro_dictionaries_filter(number_of_dicts,macro_df):
   top_count=number_of_dicts-(round(number_of_dicts/dictionaries_range_for_discard))
 
   macro_df_with_filter=macro_df[macro_df.Count < top_count]
+  macro_df_with_filter=macro_df_with_filter.sort_values(by='Word', ascending=True)
   macro_dict_with_words_out_of_bounds=macro_df[macro_df.Count >= top_count]
 
   macro_df_with_filter.to_csv('{}{}{}'.format(macro_dictionaries_path,'macro-dictionary',file_type),sep=SEPARATOR,encoding=ENCODING,index=False)
   macro_dict_with_words_out_of_bounds.to_csv('{}{}{}'.format(macro_dictionaries_path,'macro-dictionary-out-of-bounds',file_type),sep=SEPARATOR,encoding=ENCODING,index=False)
+
+  micro_dictionaries=set_micro_dictionaries(min_len,macro_df_with_filter)
   #Cleaning data with words out of bounds
-  return macro_dict_with_words_out_of_bounds['Word'].array
+  return macro_dict_with_words_out_of_bounds['Word'].array,micro_dictionaries,macro_df_with_filter
 
 def dictionaries_cleaner_by_quantile(dictionaries_path):
   for r, d, f in os.walk(dictionaries_path):
@@ -188,7 +194,7 @@ def articles_len_filter(article):
 
 @timing
 #@profile
-def predict_new_website_context(nlp):
+def predict_new_website_context(nlp,micro_dictionaries,macro_df_with_filter):
   session = requests.session()
   arr_to_predict=[
     'https://hbase.apache.org/'
@@ -213,15 +219,19 @@ def predict_new_website_context(nlp):
     for r, d, f in os.walk(dictionaries_path):
         for file in f:
             count=points=0
-            df_words={}
             df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
-            for index, row in df.iterrows():
-                df_words[row['Word']]=row['Points']
-            df_words_keys=df_words.keys()
+            df_words_keys,df_words=get_df_keys(df)
             for index, row in df_from_candidate.iterrows():
-                if row['Word'] in df_words_keys:
+              filtered_section=row['Word'][:min_len]
+              try:
+                current_section_of_dictionary=macro_df_with_filter[micro_dictionaries[filtered_section+'--Begin']:micro_dictionaries[filtered_section+'--End']+1]
+                df_temp_for_scorer=current_section_of_dictionary[current_section_of_dictionary['Word'] == row['Word']]
+                if(len(df_temp_for_scorer)>0) and (row['Word'] in df_words_keys):
                     points=points+df_words[row['Word']]
                     count=count+1
+              except BaseException as error:
+                #print(error)
+                continue
             final_result_dict[file.split(file_type)[0].title()]=points
         final_result_dict=sorted(final_result_dict.items(), key=operator.itemgetter(1), reverse=True)
         print('{}{}'.format(colored(url,'yellow'),colored(final_result_dict, 'green')))
@@ -233,3 +243,21 @@ def reduce_dictionaries_to_smallest_one(dictionaries_len_dict):
           df=pd.read_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING)
           df=df[:SMALLEST_DICTIONARY_LEN]
           df.to_csv('{}{}'.format(dictionaries_path,file), sep=SEPARATOR,encoding=ENCODING,index=False)
+
+def set_micro_dictionaries(chunk_size,df):
+    first_chars={}
+    counter=0
+    for index, row in df.iterrows():
+        filter_section=row['Word'][:chunk_size]
+        if not ((filter_section+'--Begin') in first_chars.keys()):
+            first_chars[filter_section+'--Begin']=counter
+        else:
+            first_chars[filter_section+'--End']=counter
+        counter+=1
+    return first_chars
+
+def get_df_keys(df):
+  df_words={}
+  for index, row in df.iterrows():
+    df_words[row['Word']]=row['Points']
+  return df_words.keys(),df_words

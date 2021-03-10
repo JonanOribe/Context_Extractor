@@ -206,6 +206,8 @@ def predict_new_website_context(nlp,micro_dictionaries,macro_df_with_filter):
     ,'https://en.wikipedia.org/wiki/SolarCity'
     ,'https://explained.ai/'
     ,'https://bl.ocks.org/mbostock'
+    ,'https://realfood.tesco.com/healthy-recipes.html?icid=dchp_bs3_healthy_recipes_wk01'
+    ,'https://www.carrefour.com/en'
     ]
   for url in arr_to_predict:
     final_result_dict={}

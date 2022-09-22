@@ -1,4 +1,4 @@
-# Inferator ![Python application](https://github.com/JonanOribe/Inferator/workflows/Python%20application/badge.svg) ![Docker](https://github.com/JonanOribe/Inferator/workflows/Docker/badge.svg)
+# Inferator ![Python application](https://github.com/JonanOribe/Inferator/workflows/Python%20application/badge.svg) ![Docker](https://github.com/JonanOribe/Inferator/workflows/Docker/badge.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7104963.svg)](https://doi.org/10.5281/zenodo.7104963)
 
 
 This project works around the idea of ​​being able to detect the context of a website by analyzing its content automatically and the auto-training of the model.

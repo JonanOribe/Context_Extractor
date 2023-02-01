@@ -18,6 +18,7 @@ dictionaries_len_dict={}
 config = configparser.RawConfigParser()
 config.read('config_file.ini',encoding=ENCODING)
 nlp = spacy.load('en_core_web_sm')
+nlp.max_length = 2000000
 
 SEPARATOR=config['DEFAULT']['separator']
 dictionaries_path=config['DEFAULT']['dictionaries_path']

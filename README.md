@@ -4,8 +4,8 @@
 This project works around the idea of ​​being able to detect the context of a website by analyzing its content automatically and the auto-training of the model.
 
 <h3>:construction: Working enviroment:</h3>
-<li>Enviroment creation: <b>python3 -m venv Context-Extractor-env</b></li> 
-<li>Enviroment activation: <b>Context-Extractor-env\Scripts\activate</b></li>
+<li>Enviroment creation: <b>py -m venv env</b></li> 
+<li>Enviroment activation: <b>env\Scripts\activate</b></li>
 <h3>:books: Dependencies</h3>
 <li>pip3 install -r requirements.txt</li>
 <li>python -m spacy download en_core_web_sm</li>
